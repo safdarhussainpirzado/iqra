@@ -47,6 +47,10 @@
             confirmLoading:   false,
             confirmConfig:    { title: '', message: '', isDanger: false, action: null },
 
+            // ─── Global Layout Defaults ──────────────────────────────────
+            density:     'spacious',
+            showSidebar: false,
+
             // ─── 2. Academic Data ─────────────────────────────────────────
             boards:    [],
             subjects:  [],
@@ -54,21 +58,79 @@
             classesList: Array.from({ length: 12 }, (_, i) => ({ id: i + 1, name: `Class ${i + 1}` })),
 
             // ─── Board UI ─────────────────────────────────────────────────
-            showBoardModal: false,
-            boardForm:      { id: null, name: '', code: '' },
-            boardSearch:    '',
+            showBoardModal:     false,
+            showBoardViewModal: false,
+            viewingBoard:       null,
+            boardForm:          { id: null, name: '', code: '' },
+            boardSearch:        '',
+            boardView:          'table',
+            boardPage:          1,
+            boardPerPage:       5,
+
+            boardsFiltered() {
+                return this.boards.filter(b => b.name.toLowerCase().includes(this.boardSearch.toLowerCase()));
+            },
+            boardsPaged() {
+                const start = (this.boardPage - 1) * this.boardPerPage;
+                return this.boardsFiltered().slice(start, start + this.boardPerPage);
+            },
+            viewBoard(board) {
+                this.viewingBoard = board;
+                this.showBoardViewModal = true;
+            },
 
             // ─── Subject UI ───────────────────────────────────────────────
             subjectSearch:      '',
             subjectFilterBoard: '',
+            subjectView:        'table',
+            subjectPage:        1,
+            subjectPerPage:     5,
+            showSubjectViewModal: false,
+            viewingSubject:     null,
+
+            subjectsFiltered() {
+                return this.subjects.filter(s =>
+                    (this.subjectFilterBoard === '' || String(s.board_id) === String(this.subjectFilterBoard)) &&
+                    s.name.toLowerCase().includes(this.subjectSearch.toLowerCase())
+                );
+            },
+            subjectsPaged() {
+                const start = (this.subjectPage - 1) * this.subjectPerPage;
+                return this.subjectsFiltered().slice(start, start + this.subjectPerPage);
+            },
+            viewSubject(subj) {
+                this.viewingSubject = subj;
+                this.showSubjectViewModal = true;
+            },
 
             // ─── Chapter UI ───────────────────────────────────────────────
-            showChapterModal:    false,
-            chapterForm:         { id: null, board_id: '', subject_id: '', title: '', chapter_number: '' },
-            chapterError:        '',
-            chapterSearch:       '',
-            chapterFilterBoard:  '',
+            showChapterModal:     false,
+            showChapterViewModal: false,
+            viewingChapter:       null,
+            chapterForm:          { id: null, board_id: '', subject_id: '', title: '', chapter_number: '' },
+            chapterError:         '',
+            chapterSearch:        '',
+            chapterFilterBoard:   '',
             chapterFilterSubject: '',
+            chapterView:          'table',
+            chapterPage:          1,
+            chapterPerPage:       5,
+
+            chaptersFiltered() {
+                return this.chapters.filter(c =>
+                    (this.chapterFilterBoard   === '' || String(c.board_id)   === String(this.chapterFilterBoard)) &&
+                    (this.chapterFilterSubject === '' || String(c.subject_id) === String(this.chapterFilterSubject)) &&
+                    c.title.toLowerCase().includes(this.chapterSearch.toLowerCase())
+                );
+            },
+            chaptersPaged() {
+                const start = (this.chapterPage - 1) * this.chapterPerPage;
+                return this.chaptersFiltered().slice(start, start + this.chapterPerPage);
+            },
+            viewChapter(ch) {
+                this.viewingChapter = ch;
+                this.showChapterViewModal = true;
+            },
 
             // ─── Ingestion ────────────────────────────────────────────────
             uploading:            false,
@@ -83,8 +145,10 @@
             jobsRefreshInterval: null,
 
             // ─── Question Bank ────────────────────────────────────────────
-            questions:       [],
-            showQuestionModal: false,
+            questions:              [],
+            showQuestionModal:      false,
+            showQuestionViewModal:  false,
+            viewingQuestion:        null,
             questionForm: {
                 id: null, board_id: '', class_id: '', subject_id: '', chapter_id: '',
                 type: 'MCQ', question_text: '', difficulty: 'Medium', marks: 1, language: 'English',
@@ -95,7 +159,32 @@
                     { option_text: '', is_correct: false },
                 ],
             },
-            qSearch: '', qFilterBoard: '', qFilterSubject: '', qFilterType: '', qFilterDifficulty: '',
+            qSearch:            '',
+            qFilterBoard:       '',
+            qFilterSubject:     '',
+            qFilterType:        '',
+            qFilterDifficulty:  '',
+            qView:              'table',
+            qPage:              1,
+            qPerPage:           5,
+
+            questionsFiltered() {
+                return this.questions.filter(q =>
+                    (this.qFilterBoard      === '' || String(q.board_id)   === String(this.qFilterBoard)) &&
+                    (this.qFilterSubject    === '' || String(q.subject_id) === String(this.qFilterSubject)) &&
+                    (this.qFilterType       === '' || q.type               === this.qFilterType) &&
+                    (this.qFilterDifficulty === '' || q.difficulty         === this.qFilterDifficulty) &&
+                    (q.question_text || '').toLowerCase().includes(this.qSearch.toLowerCase())
+                );
+            },
+            questionsPaged() {
+                const start = (this.qPage - 1) * this.qPerPage;
+                return this.questionsFiltered().slice(start, start + this.qPerPage);
+            },
+            viewQuestion(q) {
+                this.viewingQuestion = q;
+                this.showQuestionViewModal = true;
+            },
 
             // ─── Paper Generator ──────────────────────────────────────────
             paperForm:     { title: '', board_id: '', class_id: '', subject_id: '', chapter_ids: [], difficulty: 'All', total_marks: 50 },
@@ -109,9 +198,31 @@
             libraryFilterType:  '',
 
             // ─── Logs ─────────────────────────────────────────────────────
-            systemLogs:      [],
-            logSearch:       '',
-            logFilterAction: '',
+            systemLogs:         [],
+            logSearch:          '',
+            logFilterAction:    '',
+            logPage:            1,
+            logPerPage:         10,
+            showLogViewModal:   false,
+            viewingLog:         null,
+
+            logsFiltered() {
+                return this.systemLogs.filter(l =>
+                    (this.logFilterAction === '' || l.action.includes(this.logFilterAction)) &&
+                    (
+                        (l.description || '').toLowerCase().includes(this.logSearch.toLowerCase()) ||
+                        (l.action      || '').toLowerCase().includes(this.logSearch.toLowerCase())
+                    )
+                );
+            },
+            logsPaged() {
+                const start = (this.logPage - 1) * this.logPerPage;
+                return this.logsFiltered().slice(start, start + this.logPerPage);
+            },
+            viewLog(log) {
+                this.viewingLog = log;
+                this.showLogViewModal = true;
+            },
 
             // ═════════════════════════════════════════════════════════════
             // 3. Init
