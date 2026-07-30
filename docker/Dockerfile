@@ -17,7 +17,7 @@ RUN apk add --no-cache \
     tesseract-ocr-data-sin
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql bcmath gd soap intl zip
+RUN docker-php-ext-install pdo_mysql bcmath gd soap intl zip pcntl
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
