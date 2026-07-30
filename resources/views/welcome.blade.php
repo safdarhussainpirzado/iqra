@@ -98,6 +98,9 @@
                     <a href="#" @click.prevent="openPaperGeneratorView()" :class="currentView === 'papers' ? 'bg-indigo-600/20 text-indigo-400 border-l-4 border-indigo-500' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-150">
                         Paper Generator
                     </a>
+                    <a href="#" @click.prevent="openLibraryView()" :class="currentView === 'library' ? 'bg-indigo-600/20 text-indigo-400 border-l-4 border-indigo-500' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-150">
+                        Notes & Materials
+                    </a>
                     <a href="#" @click.prevent="openLogsView()" :class="currentView === 'logs' ? 'bg-indigo-600/20 text-indigo-400 border-l-4 border-indigo-500' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-150">
                         Logs & Reports
                     </a>
@@ -747,6 +750,65 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- Library (Notes & Materials) Panel -->
+                    <div x-show="currentView === 'library'" class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-slate-100">Indexed Notes & Books Library</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Left: List of Notes and Materials -->
+                            <div class="lg:col-span-1 space-y-4">
+                                <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Documents</h4>
+                                <div class="space-y-2 max-h-[600px] overflow-y-auto pr-2">
+                                    <template x-for="item in libraryItems" :key="item.unique_id">
+                                        <div @click="selectLibraryItem(item)" :class="activeLibraryItem?.unique_id === item.unique_id ? 'bg-indigo-600/30 border-indigo-500/50' : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'" class="p-4 rounded-xl border cursor-pointer transition duration-150">
+                                            <div class="flex items-center justify-between">
+                                                <span :class="item.type === 'note' ? 'bg-indigo-500/20 text-indigo-300' : 'bg-pink-500/20 text-pink-300'" class="px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase" x-text="item.type"></span>
+                                                <span class="text-[10px] text-slate-400" x-text="item.file_type"></span>
+                                            </div>
+                                            <h5 class="text-sm font-bold mt-2 text-slate-100" x-text="item.title"></h5>
+                                            <div class="text-[10px] text-slate-400 mt-1" x-text="`${item.board?.name} / ${item.subject?.name} / ${item.chapter?.title}`"></div>
+                                        </div>
+                                    </template>
+                                    <template x-if="libraryItems.length === 0">
+                                        <div class="text-xs text-slate-500 py-4 text-center">No documents ingested yet.</div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Content Editor Pane -->
+                            <div class="lg:col-span-2">
+                                <template x-if="activeLibraryItem">
+                                    <div class="backdrop-blur-md bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+                                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                                            <div>
+                                                <h4 class="text-md font-bold text-indigo-400" x-text="activeLibraryItem.title"></h4>
+                                                <p class="text-[10px] text-slate-400 mt-0.5" x-text="`Classification: ${activeLibraryItem.board?.name} > ${activeLibraryItem.subject?.name} > ${activeLibraryItem.chapter?.title}`"></p>
+                                            </div>
+                                            <span class="text-xs text-slate-400">Type: <strong class="uppercase" x-text="activeLibraryItem.file_type"></strong></span>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-semibold text-slate-400 mb-2">Document Text Corpus (Editable)</label>
+                                            <textarea x-model="activeLibraryItem.extracted_text" rows="18" class="w-full rounded-xl border-0 bg-slate-850 p-4 text-slate-200 text-xs font-mono focus:ring-2 focus:ring-indigo-500"></textarea>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[10px] text-slate-500">Character length: <span x-text="activeLibraryItem.extracted_text?.length || 0"></span></span>
+                                            <button @click="saveLibraryItemUpdates()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-xs font-semibold shadow-md transition duration-150">
+                                                Save Document Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template x-if="!activeLibraryItem">
+                                    <div class="h-64 border border-dashed border-slate-800 rounded-2xl flex items-center justify-center text-slate-500 text-sm">
+                                        Select a note or book from the list on the left to read, review, or edit its extracted database text corpus.
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>
@@ -790,6 +852,8 @@
                 paperForm: { title: '', board_id: '', class_id: '', subject_id: '', chapter_ids: [], difficulty: 'All', total_marks: 50 },
                 generatedPaper: null,
                 systemLogs: [],
+                libraryItems: [],
+                activeLibraryItem: null,
 
                 initApp() {
                     if (this.token) {
@@ -1085,6 +1149,39 @@
                         this.systemLogs = await this.apiCall('logs');
                     } catch (e) {
                         console.error('Failed to load activity logs', e);
+                    }
+                },
+
+                async openLibraryView() {
+                    this.currentView = 'library';
+                    this.activeLibraryItem = null;
+                    try {
+                        const notes = await this.apiCall('notes');
+                        const materials = await this.apiCall('materials');
+                        
+                        // Map type so we can display them together in a list
+                        const mappedNotes = notes.map(n => ({ ...n, type: 'note', unique_id: `note_${n.id}` }));
+                        const mappedMaterials = materials.map(m => ({ ...m, type: 'material', unique_id: `material_${m.id}` }));
+                        
+                        this.libraryItems = [...mappedNotes, ...mappedMaterials];
+                    } catch (e) {
+                        console.error('Failed to load library items', e);
+                    }
+                },
+
+                selectLibraryItem(item) {
+                    this.activeLibraryItem = { ...item };
+                },
+
+                async saveLibraryItemUpdates() {
+                    if (!this.activeLibraryItem) return;
+                    const endpoint = this.activeLibraryItem.type === 'note' ? `notes/${this.activeLibraryItem.id}` : `materials/${this.activeLibraryItem.id}`;
+                    try {
+                        await this.apiCall(endpoint, 'PUT', { extracted_text: this.activeLibraryItem.extracted_text });
+                        alert('Document content successfully updated in database.');
+                        this.openLibraryView();
+                    } catch (e) {
+                        alert(e.message);
                     }
                 }
             };
