@@ -97,6 +97,8 @@ class DatabaseSeeder extends Seeder
             'Federal Board' => 'FBISE',
             'Sindh Board' => 'SINDH',
             'Punjab Board' => 'PUNJAB',
+            'KPK Board' => 'KPK',
+            'Gilgit Board' => 'GILGIT',
         ];
         $boardModels = [];
         foreach ($boards as $name => $code) {
