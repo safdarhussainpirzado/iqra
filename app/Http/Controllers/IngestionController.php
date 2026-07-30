@@ -26,7 +26,7 @@ class IngestionController extends Controller
     public function ingest(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|max:10240', // 10MB limit
+            'file' => 'required|file|max:25600', // 25MB limit
             'target_type' => 'required|in:note,material,question',
             'board_id' => 'required|exists:boards,id',
             'class_id' => 'required|exists:classes,id',
