@@ -20,6 +20,7 @@ class ProcessOcrJob implements ShouldQueue
     protected string $tempFilePath;
     protected string $targetType; // note, material, question
     protected array $metadata;
+    public int $timeout = 1800; // 30 minutes for heavy OCR processing
 
     public function __construct(string $tempFilePath, string $targetType, array $metadata)
     {
