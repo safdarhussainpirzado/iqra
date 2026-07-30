@@ -861,6 +861,7 @@
                 async loadBoards() {
                     try {
                         this.boards = await this.apiCall('boards');
+                        this.currentView = 'boards';
                     } catch (e) {
                         console.error('Failed to load boards', e);
                     }
@@ -900,6 +901,7 @@
                 async loadSubjects() {
                     try {
                         this.subjects = await this.apiCall('subjects');
+                        this.currentView = 'subjects';
                     } catch (e) {
                         console.error('Failed to load subjects', e);
                     }
@@ -908,6 +910,7 @@
                 async loadChapters() {
                     try {
                         this.chapters = await this.apiCall('chapters');
+                        this.currentView = 'chapters';
                     } catch (e) {
                         console.error('Failed to load chapters', e);
                     }
