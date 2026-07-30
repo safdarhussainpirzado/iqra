@@ -1,43 +1,45 @@
 {{-- Dashboard Panel — Premium ZIWO Light Theme --}}
-<div x-show="currentView === 'dashboard'" class="space-y-6" x-transition>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
-            <div>
-                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Classes Supported</p>
-                <div class="text-3xl font-black text-slate-800 mt-1">12</div>
+<div x-show="currentView === 'dashboard'" class="space-y-10" x-transition>
+    
+    {{-- Offset Stats Row matching ZIWO exactly --}}
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-6">
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-indigo-500 shadow-[0_8px_16px_rgba(99,102,241,0.2)] text-white">
+                <i class="fas fa-graduation-cap text-xs"></i>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm">
-                <i class="fas fa-graduation-cap text-base"></i>
+            <div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Classes Supported</span>
+                <span class="text-3xl font-black text-slate-800" x-text="'12'"></span>
             </div>
         </div>
         
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
-            <div>
-                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Boards</p>
-                <div class="text-3xl font-black text-slate-800 mt-1" x-text="boards.length || '0'"></div>
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-purple-500 shadow-[0_8px_16px_rgba(168,85,247,0.2)] text-white">
+                <i class="fas fa-building-columns text-xs"></i>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 shadow-sm">
-                <i class="fas fa-building-columns text-base"></i>
+            <div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Total Boards</span>
+                <span class="text-3xl font-black text-slate-800" x-text="boards.length || '0'"></span>
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
-            <div>
-                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Subjects Indexed</p>
-                <div class="text-3xl font-black text-slate-800 mt-1" x-text="subjects.length || '0'"></div>
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-pink-500 shadow-[0_8px_16px_rgba(244,63,94,0.2)] text-white">
+                <i class="fas fa-book-open text-xs"></i>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center text-pink-600 shadow-sm">
-                <i class="fas fa-book-open text-base"></i>
+            <div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Subjects Indexed</span>
+                <span class="text-3xl font-black text-slate-800" x-text="subjects.length || '0'"></span>
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
-            <div>
-                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Questions Banked</p>
-                <div class="text-3xl font-black text-slate-800 mt-1" x-text="questions.length || '0'"></div>
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-emerald-500 shadow-[0_8px_16px_rgba(16,185,129,0.2)] text-white">
+                <i class="fas fa-circle-question text-xs"></i>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-sm">
-                <i class="fas fa-circle-question text-base"></i>
+            <div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Questions Banked</span>
+                <span class="text-3xl font-black text-emerald-500" x-text="questions.length || '0'"></span>
             </div>
         </div>
     </div>

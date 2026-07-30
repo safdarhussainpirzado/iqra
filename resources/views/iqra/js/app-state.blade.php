@@ -34,6 +34,7 @@
             token:       store.get('token') || '',
             user:        null,
             currentView: 'dashboard',
+            navigating:  false,
             loginForm:   { email: '', password: '' },
             loginError:  '',
 
@@ -63,6 +64,7 @@
             showBoardViewModal: false,
             viewingBoard:       null,
             boardForm:          { id: null, name: '', code: '' },
+            boardError:         '',
             boardSearch:        '',
             boardView:          'table',
             boardPage:          1,
@@ -236,6 +238,15 @@
                 }
             },
 
+            async navigateTo(view, fetchFunc = null) {
+                this.navigating = true;
+                if (fetchFunc) {
+                    try { await fetchFunc(); } catch(e) { this.showError(e.message); }
+                }
+                this.currentView = view;
+                setTimeout(() => { this.navigating = false; }, 350);
+            },
+
             async fetchUser() {
                 try {
                     this.user = await this.apiCall('me');
@@ -324,20 +335,19 @@
                 }
             },
 
-            // ═════════════════════════════════════════════════════════════
-            // 7. Boards
-            // ═════════════════════════════════════════════════════════════
             async loadBoards() {
-                this.boards      = await this.apiCall('boards');
-                this.currentView = 'boards';
+                await this.navigateTo('boards', async () => {
+                    this.boards = await this.apiCall('boards');
+                });
             },
-
+            
             editBoard(board) {
                 this.boardForm    = { ...board };
                 this.showBoardModal = true;
             },
 
             async saveBoard() {
+                this.boardError = '';
                 try {
                     if (this.boardForm.id) {
                         const updated = await this.apiCall(`boards/${this.boardForm.id}`, 'PUT', this.boardForm);
@@ -350,7 +360,10 @@
                     }
                     this.showBoardModal = false;
                     this.boardForm      = { id: null, name: '', code: '' };
-                } catch (e) { this.showError(e.message); }
+                } catch (e) {
+                    this.boardError = e.message;
+                    this.showError(e.message);
+                }
             },
 
             // Generic delete helper used by Boards (and any simple array-backed resource)
@@ -374,8 +387,9 @@
             // 8. Subjects
             // ═════════════════════════════════════════════════════════════
             async loadSubjects() {
-                this.subjects    = await this.apiCall('subjects');
-                this.currentView = 'subjects';
+                await this.navigateTo('subjects', async () => {
+                    this.subjects = await this.apiCall('subjects');
+                });
             },
 
             filteredSubjects() {
@@ -389,8 +403,9 @@
             // 9. Chapters
             // ═════════════════════════════════════════════════════════════
             async loadChapters() {
-                this.chapters    = await this.apiCall('chapters');
-                this.currentView = 'chapters';
+                await this.navigateTo('chapters', async () => {
+                    this.chapters = await this.apiCall('chapters');
+                });
             },
 
             openChapterCreateModal() {
@@ -448,7 +463,11 @@
             // ═════════════════════════════════════════════════════════════
             // 10. Ingestion & Scraper
             // ═════════════════════════════════════════════════════════════
-            openUploaderView() { this.currentView = 'uploader'; this.extractedTextPreview = ''; },
+            openUploaderView() {
+                this.navigateTo('uploader', () => {
+                    this.extractedTextPreview = '';
+                });
+            },
 
             async submitUpload() {
                 this.uploading = true;
@@ -482,7 +501,9 @@
                 this.uploading = false;
             },
 
-            async openScraperView() { this.currentView = 'scraper'; },
+            async openScraperView() {
+                await this.navigateTo('scraper');
+            },
 
             async submitScrape() {
                 this.scraping = true;
@@ -497,12 +518,13 @@
             // 11. Jobs & Queue
             // ═════════════════════════════════════════════════════════════
             async openJobsView() {
-                this.currentView = 'jobs';
-                await Promise.all([this.loadJobs(), this.openLogsView(false)]);
-                clearInterval(this.jobsRefreshInterval);
-                this.jobsRefreshInterval = setInterval(() => {
-                    if (this.currentView === 'jobs') this.loadJobs();
-                }, 10000);
+                await this.navigateTo('jobs', async () => {
+                    await Promise.all([this.loadJobs(), this.openLogsView(false)]);
+                    clearInterval(this.jobsRefreshInterval);
+                    this.jobsRefreshInterval = setInterval(() => {
+                        if (this.currentView === 'jobs') this.loadJobs();
+                    }, 10000);
+                });
             },
 
             async loadJobs() {
@@ -531,15 +553,14 @@
             // 12. Library
             // ═════════════════════════════════════════════════════════════
             async openLibraryView() {
-                this.currentView      = 'library';
-                this.activeLibraryItem = null;
-                try {
+                await this.navigateTo('library', async () => {
+                    this.activeLibraryItem = null;
                     const [notes, materials] = await Promise.all([this.apiCall('notes'), this.apiCall('materials')]);
                     this.libraryItems = [
                         ...notes.map(n     => ({ ...n,     type: 'note',     unique_id: `note_${n.id}` })),
                         ...materials.map(m => ({ ...m, type: 'material', unique_id: `material_${m.id}` })),
                     ];
-                } catch (e) { this.showError('Failed to load library: ' + e.message); }
+                });
             },
 
             filteredLibraryItems() {
@@ -582,12 +603,10 @@
                 this.showConfirmModal = true;
             },
 
-            // ═════════════════════════════════════════════════════════════
-            // 13. Questions
-            // ═════════════════════════════════════════════════════════════
             async loadQuestions() {
-                this.questions   = await this.apiCall('questions');
-                this.currentView = 'questions';
+                await this.navigateTo('questions', async () => {
+                    this.questions = await this.apiCall('questions');
+                });
             },
 
             filteredQuestions() {
@@ -667,7 +686,11 @@
             // ═════════════════════════════════════════════════════════════
             // 14. Paper Generator
             // ═════════════════════════════════════════════════════════════
-            openPaperGeneratorView() { this.currentView = 'papers'; this.generatedPaper = null; },
+            openPaperGeneratorView() {
+                this.navigateTo('papers', () => {
+                    this.generatedPaper = null;
+                });
+            },
 
             async generatePaper() {
                 try {
@@ -686,9 +709,14 @@
             // 15. Logs & Reports
             // ═════════════════════════════════════════════════════════════
             async openLogsView(switchView = true) {
-                if (switchView) this.currentView = 'logs';
-                try { this.systemLogs = await this.apiCall('logs'); }
-                catch (e) { console.error('Failed to load logs', e); }
+                if (switchView) {
+                    await this.navigateTo('logs', async () => {
+                        this.systemLogs = await this.apiCall('logs');
+                    });
+                } else {
+                    try { this.systemLogs = await this.apiCall('logs'); }
+                    catch (e) { console.error('Failed to load logs', e); }
+                }
             },
 
             filteredLogs() {
