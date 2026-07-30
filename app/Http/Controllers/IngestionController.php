@@ -212,4 +212,16 @@ class IngestionController extends Controller
         ]);
         return response()->json($material);
     }
+
+    public function destroyNote(Note $note)
+    {
+        $note->delete();
+        return response()->json(['message' => 'Note deleted.']);
+    }
+
+    public function destroyMaterial(Material $material)
+    {
+        $material->delete();
+        return response()->json(['message' => 'Material deleted.']);
+    }
 }

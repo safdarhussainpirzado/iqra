@@ -135,6 +135,18 @@ class PaperGeneratorController extends Controller
         return response()->json($paper);
     }
 
+    public function updateQuestion(Request $request, Question $question)
+    {
+        $request->validate([
+            'question_text' => 'required|string',
+            'difficulty'    => 'required|string',
+            'marks'         => 'required|integer',
+            'language'      => 'required|string',
+        ]);
+        $question->update($request->only(['question_text', 'difficulty', 'marks', 'language']));
+        return response()->json($question->load('options'));
+    }
+
     public function getPapers()
     {
         return GeneratedPaper::all();

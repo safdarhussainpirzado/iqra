@@ -7,9 +7,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\SubjectController;
-
 use App\Http\Controllers\IngestionController;
 use App\Http\Controllers\PaperGeneratorController;
+use App\Http\Controllers\JobsController;
 
 // Public Auth routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -41,7 +41,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Logs & Reports
     Route::get('/logs', function () {
-        return \App\Models\ActivityLog::with('user')->orderBy('id', 'desc')->take(100)->get();
+        return \App\Models\ActivityLog::with('user')->orderBy('id', 'desc')->take(200)->get();
     });
+
+    // Queue & Jobs Monitor
+    Route::get('/jobs', [JobsController::class, 'index']);
+    Route::delete('/jobs/failed/{id}', [JobsController::class, 'destroyFailed']);
+    Route::post('/jobs/failed/{id}/retry', [JobsController::class, 'retryFailed']);
+
+    // Delete routes for library items
+    Route::delete('/notes/{note}', [IngestionController::class, 'destroyNote']);
+    Route::delete('/materials/{material}', [IngestionController::class, 'destroyMaterial']);
+
+    // Question Bank full CRUD
+    Route::put('/questions/{question}', [PaperGeneratorController::class, 'updateQuestion']);
 });
 
