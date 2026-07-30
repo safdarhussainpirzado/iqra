@@ -1,159 +1,210 @@
 {{-- ═══════════════════════════════════════════════════════════════════
-     LOGS & REPORTS PANEL — Premium UI
+     LOGS & REPORTS PANEL — Premium ZIWO Light Theme
      ═══════════════════════════════════════════════════════════════════ --}}
-<div x-show="currentView === 'logs'" class="flex gap-6 min-h-0">
+<div x-show="currentView === 'logs'" class="flex gap-8 min-h-0" x-transition>
 
     {{-- ── Main Content ──────────────────────────────────────────────── --}}
-    <div class="flex-1 min-w-0 space-y-5">
+    <div class="flex-1 min-w-0 space-y-6">
 
         {{-- Stats Row --}}
         <div class="grid grid-cols-4 gap-4">
-            <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl px-5 py-4 flex items-center gap-4 shadow-lg">
-                <div class="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-clipboard-list text-indigo-400"></i>
+            <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm">
+                    <i class="fas fa-clipboard-list text-base"></i>
                 </div>
                 <div>
-                    <div class="text-2xl font-extrabold text-indigo-400" x-text="systemLogs.length"></div>
-                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Activities</div>
+                    <div class="text-2xl font-black text-slate-800" x-text="systemLogs.length"></div>
+                    <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Total Activities</div>
                 </div>
             </div>
-            <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl px-5 py-4 flex items-center gap-4 shadow-lg">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-circle-check text-emerald-400"></i>
+            <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-sm">
+                    <i class="fas fa-circle-check text-base"></i>
                 </div>
                 <div>
-                    <div class="text-2xl font-extrabold text-emerald-400" x-text="systemLogs.filter(l => l.action.includes('success')).length"></div>
-                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Success Operations</div>
+                    <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('success')).length"></div>
+                    <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Success Operations</div>
                 </div>
             </div>
-            <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl px-5 py-4 flex items-center gap-4 shadow-lg">
-                <div class="w-10 h-10 rounded-xl bg-rose-500/20 flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-triangle-exclamation text-rose-400"></i>
+            <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600 shadow-sm">
+                    <i class="fas fa-triangle-exclamation text-base"></i>
                 </div>
                 <div>
-                    <div class="text-2xl font-extrabold text-rose-400" x-text="systemLogs.filter(l => l.action.includes('fail') || l.action.includes('error')).length"></div>
-                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Failed Actions</div>
+                    <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('fail') || l.action.includes('error')).length"></div>
+                    <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Failed Actions</div>
                 </div>
             </div>
-            <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl px-5 py-4 flex items-center gap-4 shadow-lg">
-                <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-upload text-purple-400"></i>
+            <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 shadow-sm">
+                    <i class="fas fa-upload text-base"></i>
                 </div>
                 <div>
-                    <div class="text-2xl font-extrabold text-purple-400" x-text="systemLogs.filter(l => l.action.includes('ingest')).length"></div>
-                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Ingests Recorded</div>
+                    <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('ingest')).length"></div>
+                    <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ingests Recorded</div>
                 </div>
             </div>
         </div>
 
-        {{-- Toolbar --}}
-        <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl px-5 py-3.5 flex items-center gap-3 shadow-lg">
-            <div class="flex items-center gap-2 flex-1">
-                <i class="fas fa-clipboard-list text-indigo-400 text-sm"></i>
-                <span class="font-bold text-slate-100">Audit Trails &amp; Activity Log</span>
-                <span class="ml-1 px-2 py-0.5 bg-indigo-500/20 text-indigo-300 text-[10px] font-black rounded-full"
-                      x-text="logsFiltered().length + ' records'"></span>
-            </div>
-            <div class="relative">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                <input type="text" x-model="logSearch" placeholder="Search activities…"
-                       class="pl-8 pr-3 py-2 rounded-xl border-0 bg-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-indigo-500 w-44 placeholder:text-slate-500">
-            </div>
-            <button @click="exportLogsCSV()"
-                    class="px-4 py-2 bg-slate-700 hover:bg-slate-650 rounded-xl text-xs font-semibold shadow-md transition flex items-center gap-2">
-                <i class="fas fa-download"></i> Export CSV
-            </button>
-        </div>
+        {{-- Main Control Wrapper --}}
+        <div class="bg-white rounded-[2rem] border border-slate-150 shadow-[0_10px_40px_rgba(0,0,0,0.02)] overflow-hidden">
+            
+            {{-- Panel Header --}}
+            <div class="bg-blue-50/40 px-8 py-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center">
+                        <i class="fas fa-clipboard-list text-2xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-extrabold text-blue-900 tracking-tight flex items-center gap-2">
+                            Audit Trails &amp; Activity Log <span class="text-sm font-bold text-slate-400" x-text="'(' + logsFiltered().length + ' records)'"></span>
+                        </h2>
+                        <p class="text-slate-500 text-xs font-bold mt-0.5">Track system mutations, file ingestion outputs, and OCR logs</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-3 items-center">
+                    {{-- Row Density dropdown from ZIWO --}}
+                    <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
+                        <span class="text-[9px] font-black text-slate-400 border-r border-slate-100 pr-2 uppercase font-mono">Row Density</span>
+                        <select x-model="density" class="bg-transparent text-blue-600 text-[10px] font-black uppercase cursor-pointer outline-none focus:ring-0 border-none p-0 pr-4">
+                            <option value="condensed">Condensed</option>
+                            <option value="spacious">Spacious</option>
+                        </select>
+                    </div>
 
-        {{-- TABLE VIEW --}}
-        <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-            <table class="w-full text-left text-sm">
-                <thead class="bg-slate-800/80 text-[10px] text-slate-400 uppercase tracking-widest border-b border-slate-700">
-                    <tr>
-                        <th class="px-6 py-4 font-black">Timestamp</th>
-                        <th class="px-6 py-4 font-black">Operator</th>
-                        <th class="px-6 py-4 font-black">Action</th>
-                        <th class="px-6 py-4 font-black">Operation Details</th>
-                        <th class="px-6 py-4 font-black">IP Address</th>
-                        <th class="px-6 py-4 text-center font-black">Inspect</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template x-for="log in logsPaged()" :key="log.id">
-                        <tr class="border-b border-slate-800/50 hover:bg-slate-800/40 transition">
-                            <td class="px-6 py-4 text-xs font-mono text-slate-400 whitespace-nowrap" x-text="log.created_at"></td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-black text-xs"
-                                         x-text="log.user?.name?.charAt(0) || 'S'"></div>
-                                    <span class="text-xs font-semibold text-slate-300" x-text="log.user?.name || 'System'"></span>
+                    <button @click="exportLogsCSV()" class="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-[0_8px_20px_rgba(37,99,235,0.25)] transition-all active:scale-95">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+
+            {{-- ── TABLE VIEW ───────────────────────────────────────────── --}}
+            <div class="overflow-x-auto">
+                <table class="w-full text-left" :class="density === 'condensed' ? 'condensed-table' : 'spacious-table'">
+                    <thead class="bg-slate-50 border-b border-slate-100">
+                        <tr>
+                            <th class="px-6 py-4">
+                                <div class="flex items-center gap-2.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100 shadow-sm"><i class="fas fa-clock text-[9px]"></i></div>
+                                    <span>Timestamp</span>
                                 </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span :class="log.action.includes('success') || log.action.includes('create')
-                                               ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-                                               : log.action.includes('delete') || log.action.includes('fail')
-                                                 ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
-                                                 : 'bg-slate-800 text-slate-400 border-slate-705'"
-                                      class="px-2.5 py-1 rounded-full text-[10px] font-black border uppercase" x-text="log.action"></span>
-                            </td>
-                            <td class="px-6 py-4 text-xs text-slate-300 max-w-xs truncate" x-text="log.description"></td>
-                            <td class="px-6 py-4 text-[10px] text-slate-500 font-mono" x-text="log.ip_address"></td>
-                            <td class="px-6 py-4 text-center">
-                                <button @click="viewLog(log)" title="View Payload"
-                                        class="w-8 h-8 rounded-xl bg-blue-600 border border-blue-700 text-white flex items-center justify-center text-xs hover:bg-blue-500 active:scale-95 transition">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </td>
+                            </th>
+                            <th class="px-6 py-4">
+                                <div class="flex items-center gap-2.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100 shadow-sm"><i class="fas fa-user-circle text-[9px]"></i></div>
+                                    <span>Operator</span>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4">
+                                <div class="flex items-center gap-2.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100 shadow-sm"><i class="fas fa-tag text-[9px]"></i></div>
+                                    <span>Action</span>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4">
+                                <div class="flex items-center gap-2.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100 shadow-sm"><i class="fas fa-quote-left text-[9px]"></i></div>
+                                    <span>Details</span>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4">
+                                <div class="flex items-center gap-2.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100 shadow-sm"><i class="fas fa-network-wired text-[9px]"></i></div>
+                                    <span>IP Address</span>
+                                </div>
+                            </th>
+                            <th class="px-6 py-4 text-center">
+                                <div class="flex items-center justify-center gap-2.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    <span>Inspect</span>
+                                </div>
+                            </th>
                         </tr>
-                    </template>
-                    <template x-if="logsFiltered().length === 0">
-                        <tr><td colspan="6" class="px-6 py-14 text-center">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center">
-                                    <i class="fas fa-clipboard-list text-slate-600 text-2xl"></i>
-                                </div>
-                                <p class="text-slate-500 text-sm">No activity logs recorded.</p>
-                            </div>
-                        </td></tr>
-                    </template>
-                </tbody>
-            </table>
-            <div class="px-6 py-4 border-t border-slate-800 flex items-center justify-between bg-slate-800/40">
-                <span class="text-xs text-slate-500"
-                      x-text="`Showing ${Math.min((logPage-1)*logPerPage+1, logsFiltered().length)}–${Math.min(logPage*logPerPage, logsFiltered().length)} of ${logsFiltered().length}`"></span>
-                <div class="flex items-center gap-1">
-                    <button @click="logPage = Math.max(1, logPage-1)" :disabled="logPage===1"
-                            class="w-8 h-8 rounded-lg bg-slate-700 text-slate-300 text-xs flex items-center justify-center hover:bg-slate-600 disabled:opacity-40 transition">
-                        <i class="fas fa-chevron-left text-[10px]"></i>
-                    </button>
-                    <template x-for="p in Math.ceil(logsFiltered().length/logPerPage)" :key="p">
-                        <button @click="logPage = p"
-                                :class="logPage===p ? 'bg-indigo-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'"
-                                class="w-8 h-8 rounded-lg text-xs font-bold transition" x-text="p"></button>
-                    </template>
-                    <button @click="logPage = Math.min(Math.ceil(logsFiltered().length/logPerPage), logPage+1)"
-                            :disabled="logPage >= Math.ceil(logsFiltered().length/logPerPage)"
-                            class="w-8 h-8 rounded-lg bg-slate-700 text-slate-300 text-xs flex items-center justify-center hover:bg-slate-600 disabled:opacity-40 transition">
-                        <i class="fas fa-chevron-right text-[10px]"></i>
-                    </button>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <template x-for="log in logsPaged()" :key="log.id">
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="px-6 py-4 text-xs font-mono text-slate-400 whitespace-nowrap" x-text="log.created_at"></td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-650 flex items-center justify-center font-black text-[10px]"
+                                             x-text="log.user?.name?.charAt(0) || 'S'"></div>
+                                        <span class="text-xs font-bold text-slate-700" x-text="log.user?.name || 'System'"></span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span :class="log.action.includes('success') || log.action.includes('create')
+                                                   ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
+                                                   : log.action.includes('delete') || log.action.includes('fail')
+                                                     ? 'bg-rose-50 text-rose-600 border-rose-100'
+                                                     : 'bg-slate-100 text-slate-500 border-slate-200'"
+                                          class="px-2.5 py-1 rounded-lg text-[9px] font-black border uppercase" x-text="log.action"></span>
+                                </td>
+                                <td class="px-6 py-4 text-xs font-semibold text-slate-600 max-w-xs truncate" x-text="log.description"></td>
+                                <td class="px-6 py-4 text-[10px] text-slate-500 font-mono" x-text="log.ip_address"></td>
+                                <td class="px-6 py-4 text-center">
+                                    <button @click="viewLog(log)" title="View Payload"
+                                            class="w-9 h-9 rounded-xl bg-blue-500 border border-blue-600 text-white hover:bg-blue-600 active:scale-95 transition flex items-center justify-center mx-auto">
+                                        <i class="fas fa-eye text-xs"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </template>
+                        <template x-if="logsFiltered().length === 0">
+                            <tr>
+                                <td colspan="6" class="px-6 py-14 text-center">
+                                    <div class="flex flex-col items-center gap-3">
+                                        <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center">
+                                            <i class="fas fa-clipboard-list text-slate-400 text-2xl"></i>
+                                        </div>
+                                        <p class="text-slate-400 text-sm font-bold">No activity logs recorded.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+                {{-- Pagination Row from ZIWO --}}
+                <div class="px-8 py-4 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
+                    <span class="text-xs font-bold text-slate-400"
+                          x-text="`Showing ${Math.min((logPage-1)*logPerPage+1, logsFiltered().length)}–${Math.min(logPage*logPerPage, logsFiltered().length)} of ${logsFiltered().length} activities`"></span>
+                    <div class="flex items-center gap-1">
+                        <button @click="logPage = Math.max(1, logPage - 1)" :disabled="logPage === 1"
+                                class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-400 text-xs flex items-center justify-center hover:bg-slate-50 disabled:opacity-40 transition">
+                            <i class="fas fa-chevron-left text-[10px]"></i>
+                        </button>
+                        <template x-for="p in Math.ceil(logsFiltered().length / logPerPage)" :key="p">
+                            <button @click="logPage = p"
+                                    :class="logPage === p ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black' : 'bg-white border border-slate-200 text-slate-500 hover:bg-slate-50'"
+                                    class="w-8 h-8 rounded-lg text-xs transition" x-text="p"></button>
+                        </template>
+                        <button @click="logPage = Math.min(Math.ceil(logsFiltered().length/logPerPage), logPage + 1)"
+                                :disabled="logPage >= Math.ceil(logsFiltered().length / logPerPage)"
+                                class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-400 text-xs flex items-center justify-center hover:bg-slate-50 disabled:opacity-40 transition">
+                            <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
+
         </div>
+
     </div>
 
-    {{-- Sticky Filter Sidebar --}}
-    <div class="w-56 flex-shrink-0 space-y-4 sticky top-20 self-start">
-        <div class="backdrop-blur-md bg-slate-900/70 border border-slate-800 rounded-2xl p-4 shadow-xl">
-            <div class="flex items-center gap-2 mb-4">
-                <i class="fas fa-sliders text-indigo-400 text-xs"></i>
-                <span class="text-xs font-black text-slate-300 uppercase tracking-widest">Filters</span>
+    {{-- ── Sticky Filter Sidebar ─────────────────────────────────────── --}}
+    <div class="w-64 flex-shrink-0 space-y-4 sticky top-20 self-start">
+        <div class="bg-white border border-slate-150 rounded-3xl p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] space-y-5">
+            <div class="flex items-center gap-2 mb-2 pb-3 border-b border-slate-100">
+                <i class="fas fa-sliders text-blue-600 text-xs"></i>
+                <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Sidebar Filters</span>
             </div>
-            <div class="space-y-3">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1.5">Action Filter</label>
+            
+            <div class="space-y-4">
+                {{-- Action filter --}}
+                <div class="space-y-1">
+                    <label class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Action Filter</label>
                     <select x-model="logFilterAction" @change="logPage = 1"
-                            class="w-full rounded-xl border-0 bg-slate-800 border border-slate-700 py-2 px-3 text-slate-100 text-xs focus:ring-2 focus:ring-indigo-500">
+                            class="w-full rounded-xl border border-slate-200 bg-white py-2 px-3 text-slate-800 focus:ring-2 focus:ring-blue-500 text-xs outline-none">
                         <option value="">All Actions</option>
                         <option value="ingest">Ingestions</option>
                         <option value="ocr">OCR Tasks</option>
@@ -162,20 +213,24 @@
                         <option value="paper">Papers</option>
                     </select>
                 </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1.5">Logs Per Page</label>
-                    <div class="grid grid-cols-4 gap-1">
+
+                {{-- Records per page --}}
+                <div class="space-y-2">
+                    <label class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Records Per Page</label>
+                    <div class="grid grid-cols-4 gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/50">
                         <template x-for="n in [10,25,50,100]" :key="n">
                             <button @click="logPerPage = n; logPage = 1"
-                                    :class="logPerPage === n ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'"
-                                    class="py-1.5 rounded-lg text-[10px] font-bold transition" x-text="n"></button>
+                                    :class="logPerPage === n ? 'bg-white text-blue-600 shadow-sm font-black' : 'text-slate-500 hover:text-slate-700'"
+                                    class="py-1.5 text-[9px] uppercase tracking-widest rounded-lg transition-all" x-text="n"></button>
                         </template>
                     </div>
                 </div>
-                <div class="pt-3 border-t border-slate-800">
+
+                {{-- Action triggers --}}
+                <div class="pt-4 border-t border-slate-100 space-y-2">
                     <button @click="logSearch = ''; logFilterAction = ''; logPage = 1"
-                            class="w-full py-2 bg-rose-600/20 hover:bg-rose-600/30 border border-rose-600/30 text-rose-400 text-xs font-bold rounded-xl transition flex items-center justify-center gap-2">
-                        <i class="fas fa-rotate-left text-xs"></i> Reset Filters
+                            class="w-full py-4 text-rose-500 hover:bg-rose-50 rounded-3xl text-[9px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 active:scale-95 border border-rose-100">
+                        <i class="fas fa-broom"></i> Reset Filters
                     </button>
                 </div>
             </div>
@@ -184,50 +239,43 @@
 </div>
 
 {{-- Log Inspect Modal --}}
-<div x-show="showLogViewModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
-        <div class="bg-gradient-to-br from-indigo-700 to-indigo-900 px-6 py-5 flex items-start justify-between">
+<div x-show="showLogViewModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div class="bg-white border border-slate-150 rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden" @click.away="showLogViewModal = false">
+        <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 px-8 py-6 flex items-center justify-between text-white">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                    <i class="fas fa-clipboard-list text-white"></i>
-                </div>
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center"><i class="fas fa-clipboard-list"></i></div>
                 <div>
-                    <h3 class="text-base font-black text-white uppercase tracking-wide">Audit Payload Detail</h3>
-                    <p class="text-indigo-200 text-[10px] font-bold uppercase tracking-widest" x-text="`Log ID #${viewingLog?.id}`"></p>
+                    <h3 class="text-lg font-extrabold tracking-tight leading-none">Audit Narrative Payload</h3>
+                    <p class="text-[9px] font-black text-indigo-200 uppercase tracking-widest mt-1" x-text="`Log Entry ID #${viewingLog?.id}`"></p>
                 </div>
             </div>
-            <button @click="showLogViewModal = false" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
-                <i class="fas fa-times text-xs"></i>
-            </button>
+            <button @click="showLogViewModal = false" class="w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 text-white flex items-center justify-center transition"><i class="fas fa-times text-xs"></i></button>
         </div>
-        <div class="p-6 space-y-4">
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-3">
-                    <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Timestamp</div>
-                    <div class="text-xs font-mono font-bold text-slate-300" x-text="viewingLog?.created_at"></div>
+        <div class="p-8 space-y-5 bg-slate-50/50">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm">
+                    <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Timestamp</span>
+                    <span class="text-xs font-mono font-bold text-slate-700 block" x-text="viewingLog?.created_at"></span>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-3">
-                    <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Operator</div>
-                    <div class="text-xs font-bold text-slate-300" x-text="viewingLog?.user?.name || 'System'"></div>
+                <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm">
+                    <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Operator</span>
+                    <span class="text-xs font-bold text-slate-700 truncate block" x-text="viewingLog?.user?.name || 'System'"></span>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-3">
-                    <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Action</div>
-                    <div class="text-xs font-bold text-indigo-400 uppercase" x-text="viewingLog?.action"></div>
+                <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm">
+                    <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Action Code</span>
+                    <span class="text-xs font-black text-indigo-600 uppercase block" x-text="viewingLog?.action"></span>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700/50 rounded-xl p-3">
-                    <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">IP Address</div>
-                    <div class="text-xs font-mono font-bold text-slate-400" x-text="viewingLog?.ip_address"></div>
+                <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm">
+                    <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">IP Address</span>
+                    <span class="text-xs font-mono font-bold text-slate-500 block" x-text="viewingLog?.ip_address"></span>
                 </div>
             </div>
-            <div class="bg-slate-850 border border-slate-800 rounded-xl p-4">
-                <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Action Log Narrative</div>
-                <p class="text-xs text-slate-200 leading-relaxed font-semibold" x-text="viewingLog?.description"></p>
+            <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Audit Message Narrative</span>
+                <p class="text-xs text-slate-700 leading-relaxed font-semibold" x-text="viewingLog?.description"></p>
             </div>
-            <div class="flex justify-end pt-2 border-t border-slate-800">
-                <button @click="showLogViewModal = false"
-                        class="px-5 py-2 text-xs font-bold text-slate-400 hover:text-white border border-slate-700 rounded-xl transition uppercase tracking-widest">
-                    Close
-                </button>
+            <div class="flex justify-end pt-2">
+                <button @click="showLogViewModal = false" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md active:scale-95">Close Details</button>
             </div>
         </div>
     </div>

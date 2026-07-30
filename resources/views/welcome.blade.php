@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 @include('iqra._layout.head')
-<body class="h-full text-slate-100 antialiased selection:bg-indigo-500 selection:text-white" x-data="appState()" x-init="initApp()" x-cloak>
+<body class="h-full text-slate-800 antialiased selection:bg-blue-500 selection:text-white bg-[#f4f7fb]" x-data="appState()" x-init="initApp()" x-cloak>
 
     @include('iqra._layout.background')
     @include('iqra._layout.toast')

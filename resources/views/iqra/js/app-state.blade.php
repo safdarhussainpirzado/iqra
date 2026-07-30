@@ -49,7 +49,7 @@
 
             // ─── Global Layout Defaults ──────────────────────────────────
             density:     'spacious',
-            showSidebar: false,
+            showSidebar: true,
 
             // ─── 2. Academic Data ─────────────────────────────────────────
             boards:    [],
