@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: iqra-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    networks:
+      - iqra-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: iqra-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - iqra-network
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.0
+    container_name: iqra-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: iqra
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - iqra-network
+
+  redis:
+    image: redis:alpine
+    container_name: iqra-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - iqra-network
+
+  queue:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: iqra-queue
+    restart: unless-stopped
+    command: php artisan queue:work
+    volumes:
+      - .:/var/www/html
+    networks:
+      - iqra-network
+    depends_on:
+      - mysql
+      - redis
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: iqra-scheduler
+    restart: unless-stopped
+    command: sh -c "while [ \"1\" = \"1\" ]; do php artisan schedule:run; sleep 60; done"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - iqra-network
+    depends_on:
+      - mysql
+
+networks:
+  iqra-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
