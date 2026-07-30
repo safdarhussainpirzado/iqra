@@ -3,9 +3,11 @@
      ═══════════════════════════════════════════════════════════════════ --}}
 <div x-show="currentView === 'questions'" class="space-y-6" x-transition>
 
-    {{-- Stats Row matching ZIWO exactly with absolute top offset icons --}}
+    {{-- Stats Row matching ZIWO exactly with absolute top offset icons and status filters --}}
     <div class="grid grid-cols-4 gap-6 pt-6">
-        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+        <div @click="qFilterType = ''; qFilterDifficulty = ''; qFilterBoard = ''; qFilterSubject = ''; qSearch = ''; qPage = 1"
+             :class="(qFilterType === '' && qFilterDifficulty === '' && qFilterBoard === '' && qFilterSubject === '') ? 'card-3d-active pink' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
             <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-pink-500 shadow-[0_8px_16px_rgba(244,63,94,0.2)] text-white">
                 <i class="fas fa-circle-question text-xs"></i>
             </div>
@@ -14,7 +16,9 @@
                 <span class="text-3xl font-black text-slate-800" x-text="questions.length"></span>
             </div>
         </div>
-        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+        <div @click="qFilterType = 'MCQ'; qFilterDifficulty = ''; qPage = 1"
+             :class="qFilterType === 'MCQ' ? 'card-3d-active indigo' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
             <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-indigo-500 shadow-[0_8px_16px_rgba(99,102,241,0.2)] text-white">
                 <i class="fas fa-list-check text-xs"></i>
             </div>
@@ -23,7 +27,9 @@
                 <span class="text-3xl font-black text-slate-800" x-text="questions.filter(q => q.type === 'MCQ').length"></span>
             </div>
         </div>
-        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+        <div @click="qFilterDifficulty = 'Easy'; qFilterType = ''; qPage = 1"
+             :class="qFilterDifficulty === 'Easy' ? 'card-3d-active emerald' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
             <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-emerald-500 shadow-[0_8px_16px_rgba(16,185,129,0.2)] text-white">
                 <i class="fas fa-gauge-high text-xs"></i>
             </div>
@@ -32,7 +38,9 @@
                 <span class="text-3xl font-black text-slate-800" x-text="questions.filter(q => q.difficulty === 'Easy').length"></span>
             </div>
         </div>
-        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+        <div @click="qFilterDifficulty = 'Hard'; qFilterType = ''; qPage = 1"
+             :class="qFilterDifficulty === 'Hard' ? 'card-3d-active rose' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
             <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-rose-500 shadow-[0_8px_16px_rgba(225,29,72,0.2)] text-white">
                 <i class="fas fa-fire text-xs"></i>
             </div>
