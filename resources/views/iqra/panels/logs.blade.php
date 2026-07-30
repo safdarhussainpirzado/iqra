@@ -3,42 +3,50 @@
      ═══════════════════════════════════════════════════════════════════ --}}
 <div x-show="currentView === 'logs'" class="space-y-6" x-transition>
 
-    {{-- Stats Row --}}
-    <div class="grid grid-cols-4 gap-4">
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm">
-                <i class="fas fa-clipboard-list text-base"></i>
+    {{-- Stats Row matching ZIWO exactly with absolute top offset icons and status filters --}}
+    <div class="grid grid-cols-4 gap-6 pt-6">
+        <div @click="logFilterAction = ''; logSearch = '';"
+             :class="logFilterAction === '' ? 'card-3d-active indigo' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-indigo-500 shadow-[0_8px_16px_rgba(99,102,241,0.2)] text-white">
+                <i class="fas fa-clipboard-list text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="systemLogs.length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Total Activities</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Total Activities</span>
+                <span class="text-3xl font-black text-slate-800" x-text="systemLogs.length"></span>
             </div>
         </div>
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-sm">
-                <i class="fas fa-circle-check text-base"></i>
+        <div @click="logFilterAction = 'success';"
+             :class="logFilterAction === 'success' ? 'card-3d-active emerald' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-emerald-500 shadow-[0_8px_16px_rgba(16,185,129,0.2)] text-white">
+                <i class="fas fa-circle-check text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('success')).length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Success Operations</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Success Operations</span>
+                <span class="text-3xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('success')).length"></span>
             </div>
         </div>
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600 shadow-sm">
-                <i class="fas fa-triangle-exclamation text-base"></i>
+        <div @click="logFilterAction = 'fail';"
+             :class="logFilterAction === 'fail' ? 'card-3d-active rose' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-rose-500 shadow-[0_8px_16px_rgba(225,29,72,0.2)] text-white">
+                <i class="fas fa-triangle-exclamation text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('fail') || l.action.includes('error')).length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Failed Actions</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Failed Actions</span>
+                <span class="text-3xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('fail') || l.action.includes('error')).length"></span>
             </div>
         </div>
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 shadow-sm">
-                <i class="fas fa-upload text-base"></i>
+        <div @click="logFilterAction = 'ingest';"
+             :class="logFilterAction === 'ingest' ? 'card-3d-active purple' : ''"
+             class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-purple-500 shadow-[0_8px_16px_rgba(168,85,247,0.2)] text-white">
+                <i class="fas fa-upload text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('ingest')).length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ingests Recorded</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Ingests Recorded</span>
+                <span class="text-3xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('ingest')).length"></span>
             </div>
         </div>
     </div>

@@ -5,8 +5,8 @@
 
     {{-- Stats Row matching ZIWO exactly with absolute top offset icons and status filters --}}
     <div class="grid grid-cols-4 gap-6 pt-6">
-        <div @click="qFilterType = ''; qFilterDifficulty = ''; qFilterBoard = ''; qFilterSubject = ''; qSearch = ''; qPage = 1"
-             :class="(qFilterType === '' && qFilterDifficulty === '' && qFilterBoard === '' && qFilterSubject === '') ? 'card-3d-active pink' : ''"
+        <div @click="qFilterType = ''; qFilterDifficulty = ''; qPage = 1"
+             :class="(qFilterType === '' && qFilterDifficulty === '') ? 'card-3d-active pink' : ''"
              class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5 cursor-pointer">
             <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-pink-500 shadow-[0_8px_16px_rgba(244,63,94,0.2)] text-white">
                 <i class="fas fa-circle-question text-xs"></i>
