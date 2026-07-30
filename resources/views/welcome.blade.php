@@ -7,6 +7,27 @@
     @include('iqra._layout.toast')
     @include('iqra._layout.confirm-modal')
 
+    {{-- Global SPA Loader (100% cloned from ZIWO layout) --}}
+    <div x-show="navigating" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-[10000] bg-white/60 backdrop-blur-md flex flex-col items-center justify-center gap-4">
+        <div class="relative">
+            <div class="w-14 h-14 border-[3px] border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fa-solid fa-graduation-cap text-blue-600 text-xs animate-pulse"></i>
+            </div>
+        </div>
+        <div class="flex flex-col items-center">
+            <span class="text-[10px] font-black text-blue-700 uppercase tracking-[0.3em] animate-pulse">IQRA Platform</span>
+            <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Syncing Educational Records Grid...</span>
+        </div>
+    </div>
+
     {{-- ── Login Screen ──────────────────────────────────────────── --}}
     @include('iqra.auth.login')
 

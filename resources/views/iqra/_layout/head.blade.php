@@ -11,6 +11,7 @@
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script defer src="{{ asset('js/notification.js') }}"></script>
     
     <style>
         [x-cloak] { display: none !important; }
@@ -32,7 +33,258 @@
         .pulse-dot { animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Row Density Styles from ZIWO */
+        /* Navy colors from ZIWO */
+        .text-navy-900 { color: #0a1c2f !important; }
+        .bg-navy-900 { background-color: #0a1c2f !important; }
+        .border-navy-900 { border-color: #0a1c2f !important; }
+        .from-navy-900 { --tw-gradient-from: #0a1c2f; }
+
+        /* ============================================
+           SIDEBAR SYSTEM (100% Cloned from ZIWO layout)
+           ============================================ */
+        .sidebar-wrap {
+            width: 260px;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: visible;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .sidebar-wrap.collapsed {
+            width: 68px;
+        }
+
+        .sidebar-inner {
+            width: 100%;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Premium Floating Toggle Tab */
+        .sidebar-toggle-tab {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            margin-top: -20px;
+            z-index: 60;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ffffff, #f1f5f9);
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: #64748b;
+        }
+
+        .sidebar-toggle-tab:hover {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-color: #3b82f6;
+            color: white;
+            transform: translate(2px, -2px) !important;
+            box-shadow: -4px 4px 0px #1e40af, 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+        }
+
+        .sidebar-toggle-tab:active {
+            transform: translate(0px, 0px) !important;
+            box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+        }
+
+        .sidebar-toggle-tab i {
+            font-size: 0.85rem;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sidebar-wrap.collapsed .sidebar-toggle-tab i {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Nav item base */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.625rem 0.75rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            position: relative;
+            text-decoration: none;
+            gap: 0.75rem;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+        }
+
+        .nav-item:hover {
+            background-color: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .nav-item.active {
+            background-color: #2563eb !important;
+            color: white !important;
+            box-shadow: -4px 4px 0px #1e40af, 0 10px 15px -3px rgba(37, 99, 235, 0.4) !important;
+            transform: translate(3px, -3px) !important;
+            font-weight: 950 !important;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-item.active * {
+            color: white !important;
+        }
+
+        .nav-item.active:hover {
+            background-color: #1d4ed8 !important;
+            transform: translate(1px, -1px) !important;
+            box-shadow: -2px 2px 0px #1e40af, 0 10px 15px -3px rgba(37, 99, 235, 0.4) !important;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active .nav-icon {
+            color: white !important;
+        }
+
+        .nav-label {
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            opacity: 1;
+            transform: translateX(0);
+            overflow: hidden;
+        }
+
+        .collapsed .nav-label {
+            opacity: 0;
+            transform: translateX(-8px);
+            pointer-events: none;
+            width: 0;
+        }
+
+        /* Section headings */
+        .nav-section {
+            font-size: 0.6rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            padding: 0.875rem 0.875rem 0.375rem;
+            white-space: nowrap;
+            transition: opacity 0.2s ease;
+        }
+
+        .collapsed .nav-section {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .collapsed .nav-section-divider {
+            display: block !important;
+        }
+
+        .nav-section-divider {
+            display: none;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.5rem 0.75rem;
+        }
+
+        /* Tooltip */
+        .nav-tooltip {
+            position: absolute;
+            left: calc(100% + 12px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0f172a;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            transform: translateY(-50%) translateX(-4px);
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-tooltip::before {
+            content: '';
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-right-color: #0f172a;
+        }
+
+        .collapsed .nav-item:hover .nav-tooltip {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        /* User footer */
+        .sidebar-user-label {
+            transition: opacity 0.2s ease, width 0.2s ease;
+            overflow: hidden;
+        }
+
+        .collapsed .sidebar-user-label {
+            opacity: 0;
+            width: 0;
+        }
+
+        /* Brand area */
+        .sidebar-brand-text {
+            transition: opacity 0.2s ease, width 0.2s ease;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .collapsed .sidebar-brand-text {
+            opacity: 0;
+            width: 0;
+        }
+
+        /* Primary badge pill */
+        .nav-badge {
+            margin-left: auto;
+            font-size: 0.55rem;
+            font-weight: 900;
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            transition: opacity 0.2s ease;
+        }
+
+        .collapsed .nav-badge {
+            opacity: 0;
+        }
+
+        /* Row Density Styles */
         .condensed-table td,
         .condensed-table th {
             padding-top: 0.5rem !important;
@@ -47,7 +299,7 @@
             font-size: 0.75rem !important;
         }
 
-        /* 3D Active Card Indicators from ZIWO */
+        /* 3D Active Card Indicators */
         .card-3d-active {
             transform: translate(2px, -2px) !important;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;

@@ -1,58 +1,65 @@
-{{-- Dashboard Panel --}}
-<div x-show="currentView === 'dashboard'" class="space-y-6">
+{{-- Dashboard Panel — Premium ZIWO Light Theme --}}
+<div x-show="currentView === 'dashboard'" class="space-y-6" x-transition>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="backdrop-blur-md bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl">
-            <div class="flex items-center justify-between">
-                <span class="text-sm font-medium text-slate-400">Classes Supported</span>
-                <div class="w-9 h-9 rounded-xl bg-indigo-500/10 flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-indigo-400 text-xs"></i>
-                </div>
+        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
+            <div>
+                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Classes Supported</p>
+                <div class="text-3xl font-black text-slate-800 mt-1">12</div>
             </div>
-            <div class="text-3xl font-extrabold mt-2 text-indigo-400">12</div>
+            <div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm">
+                <i class="fas fa-graduation-cap text-base"></i>
+            </div>
         </div>
-        <div class="backdrop-blur-md bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl">
-            <div class="flex items-center justify-between">
-                <span class="text-sm font-medium text-slate-400">Boards</span>
-                <div class="w-9 h-9 rounded-xl bg-purple-500/10 flex items-center justify-center">
-                    <i class="fas fa-building-columns text-purple-400 text-xs"></i>
-                </div>
+        
+        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
+            <div>
+                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Boards</p>
+                <div class="text-3xl font-black text-slate-800 mt-1" x-text="boards.length || '0'"></div>
             </div>
-            <div class="text-3xl font-extrabold mt-2 text-purple-400" x-text="boards.length || '—'"></div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 shadow-sm">
+                <i class="fas fa-building-columns text-base"></i>
+            </div>
         </div>
-        <div class="backdrop-blur-md bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl">
-            <div class="flex items-center justify-between">
-                <span class="text-sm font-medium text-slate-400">Subjects Indexed</span>
-                <div class="w-9 h-9 rounded-xl bg-pink-500/10 flex items-center justify-center">
-                    <i class="fas fa-book-open text-pink-400 text-xs"></i>
-                </div>
+
+        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
+            <div>
+                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Subjects Indexed</p>
+                <div class="text-3xl font-black text-slate-800 mt-1" x-text="subjects.length || '0'"></div>
             </div>
-            <div class="text-3xl font-extrabold mt-2 text-pink-400" x-text="subjects.length || '—'"></div>
+            <div class="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center text-pink-600 shadow-sm">
+                <i class="fas fa-book-open text-base"></i>
+            </div>
         </div>
-        <div class="backdrop-blur-md bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl">
-            <div class="flex items-center justify-between">
-                <span class="text-sm font-medium text-slate-400">Questions Banked</span>
-                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                    <i class="fas fa-circle-question text-emerald-400 text-xs"></i>
-                </div>
+
+        <div class="bg-white rounded-3xl border border-slate-150/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-between">
+            <div>
+                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Questions Banked</p>
+                <div class="text-3xl font-black text-slate-800 mt-1" x-text="questions.length || '0'"></div>
             </div>
-            <div class="text-3xl font-extrabold mt-2 text-emerald-400" x-text="questions.length || '—'"></div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-sm">
+                <i class="fas fa-circle-question text-base"></i>
+            </div>
         </div>
     </div>
-    <div class="backdrop-blur-md bg-slate-900/40 border border-slate-800 p-6 rounded-2xl shadow-xl">
+
+    <div class="bg-white rounded-[2rem] border border-slate-150 p-8 shadow-[0_10px_40px_rgba(0,0,0,0.02)]">
         <div class="flex items-center gap-3 mb-4">
-            <div class="w-9 h-9 rounded-xl bg-indigo-500/20 flex items-center justify-center">
-                <i class="fas fa-server text-indigo-400"></i>
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shadow-sm">
+                <i class="fas fa-server text-lg"></i>
             </div>
-            <h3 class="text-lg font-bold text-indigo-400">Platform Specifications</h3>
+            <div>
+                <h3 class="text-lg font-extrabold text-blue-900 tracking-tight">Platform Specifications</h3>
+                <p class="text-slate-400 text-xs font-bold mt-0.5">Deployment nodes and core microservice runtimes</p>
+            </div>
         </div>
-        <p class="text-slate-300 text-sm">IQRA is running on PHP 8.4 with Redis queue workers ready for OCR and document ingestion processing. Upload PDFs, Word documents, or web pages for automated text extraction and intelligent question bank population.</p>
-        <div class="mt-4 flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-xs rounded-full">PHP 8.4-FPM</span>
-            <span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-xs rounded-full">Laravel 13</span>
-            <span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-xs rounded-full">MySQL 8.0</span>
-            <span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-xs rounded-full">Redis Queue</span>
-            <span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-xs rounded-full">Tesseract OCR</span>
-            <span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-xs rounded-full">Alpine.js SPA</span>
+        <p class="text-slate-600 text-sm leading-relaxed max-w-4xl">IQRA is running on PHP 8.4 with Redis queue workers ready for OCR and document ingestion processing. Upload PDFs, Word documents, or web pages for automated text extraction and intelligent question bank population.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+            <span class="px-3.5 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100 shadow-sm">PHP 8.4-FPM</span>
+            <span class="px-3.5 py-1.5 bg-purple-50 text-purple-700 text-xs font-bold rounded-xl border border-purple-100 shadow-sm">Laravel 13</span>
+            <span class="px-3.5 py-1.5 bg-pink-50 text-pink-700 text-xs font-bold rounded-xl border border-pink-100 shadow-sm">MySQL 8.0</span>
+            <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-xl border border-emerald-100 shadow-sm">Redis Queue</span>
+            <span class="px-3.5 py-1.5 bg-amber-50 text-amber-700 text-xs font-bold rounded-xl border border-amber-100 shadow-sm">Tesseract OCR</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 shadow-sm">Alpine.js SPA</span>
         </div>
     </div>
 </div>

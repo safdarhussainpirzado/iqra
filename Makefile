@@ -1,4 +1,4 @@
-.PHONY: build up down restart migrate seed fresh cache optimize test lint queue scheduler logs shell backup restore clean
+.PHONY: build up down restart migrate seed fresh cache optimize test lint queue scheduler logs shell backup restore clean dev assets
 
 # Build and start the environment
 build:
@@ -6,12 +6,23 @@ build:
 
 up:
 	docker-compose up -d
+	@echo "Deleting stale public/hot dev-server pointer to ensure production build loads correctly..."
+	rm -f public/hot
 
 down:
 	docker-compose down
 
 restart:
 	docker-compose restart
+	rm -f public/hot
+
+# Asset Management & Compilation
+dev:
+	npm run dev
+
+assets:
+	npm run build
+	rm -f public/hot
 
 # Database operations
 migrate:
@@ -22,6 +33,7 @@ seed:
 
 fresh:
 	docker-compose exec app php artisan migrate:fresh --seed
+	rm -f public/hot
 
 # Application optimization
 cache:
@@ -32,6 +44,7 @@ cache:
 
 optimize:
 	docker-compose exec app php artisan optimize
+	rm -f public/hot
 
 # Testing and Quality
 test:
@@ -62,4 +75,4 @@ restore:
 
 clean:
 	docker-compose down -v
-	rm -rf storage/framework/cache/* storage/framework/sessions/*
+	rm -rf storage/framework/cache/* storage/framework/sessions/* public/build
