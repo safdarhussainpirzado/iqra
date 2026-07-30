@@ -22,10 +22,16 @@
        14. Logs & Reports
 --}}
 <script>
+    // ─── Safe localStorage wrapper (guards against Edge Tracking Prevention) ───
+    const store = {
+        get(key)        { try { return localStorage.getItem(key); }   catch(e) { return null; } },
+        set(key, value) { try { localStorage.setItem(key, value); }    catch(e) {} },
+        del(key)        { try { localStorage.removeItem(key); }        catch(e) {} },
+    };
     function appState() {
         return {
             // ─── 1. Auth & Navigation ─────────────────────────────────────
-            token:       localStorage.getItem('token') || '',
+            token:       store.get('token') || '',
             user:        null,
             currentView: 'dashboard',
             loginForm:   { email: '', password: '' },
@@ -112,14 +118,22 @@
             // ═════════════════════════════════════════════════════════════
             initApp() {
                 if (this.token) {
-                    this.fetchUser();
-                    this.fetchInitData();
+                    // fetchUser first — if the token is expired/invalid it clears state
+                    // before fetchInitData fires so we don't flood the server with 401s
+                    this.fetchUser().then(ok => { if (ok) this.fetchInitData(); });
                 }
             },
 
             async fetchUser() {
-                try { this.user = await this.apiCall('me'); }
-                catch (e) { this.token = ''; localStorage.removeItem('token'); }
+                try {
+                    this.user = await this.apiCall('me');
+                    return true; // signal: auth ok
+                } catch (e) {
+                    this.token = '';
+                    store.del('token');
+                    this.user = null;
+                    return false; // signal: auth failed, stop init chain
+                }
             },
 
             async fetchInitData() {
@@ -139,12 +153,23 @@
             async login() {
                 this.loginError = '';
                 try {
-                    const res  = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.loginForm) });
+                    const res  = await fetch('/api/login', {
+                        method:  'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body:    JSON.stringify(this.loginForm),
+                    });
                     const data = await res.json();
-                    if (!res.ok) throw new Error(data.message || 'Login failed');
-                    this.token = data.token;
-                    localStorage.setItem('token', data.token);
-                    this.fetchUser();
+                    if (!res.ok) {
+                        // Surface the actual validation message from Laravel
+                        const msg = data.errors?.email?.[0] || data.errors?.password?.[0] || data.message || 'Login failed';
+                        throw new Error(msg);
+                    }
+                    // API returns { access_token, token_type, user }
+                    const token = data.access_token || data.token;
+                    if (!token) throw new Error('No token received from server.');
+                    this.token = token;
+                    store.set('token', token);
+                    this.user = data.user || null;
                     this.fetchInitData();
                 } catch (e) { this.loginError = e.message; }
             },
@@ -152,7 +177,7 @@
             async logout() {
                 try { await this.apiCall('logout', 'POST'); } catch (e) {}
                 this.token = '';
-                localStorage.removeItem('token');
+                store.del('token');
                 this.user = null;
             },
 
