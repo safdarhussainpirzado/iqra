@@ -127,11 +127,40 @@ class DatabaseSeeder extends Seeder
                 // Create a couple of demo chapters per subject per board
                 foreach ($boardModels as $board) {
                     for ($ch = 1; $ch <= 2; $ch++) {
-                        Chapter::create([
+                        $chapter = Chapter::create([
                             'subject_id' => $subj->id,
                             'board_id' => $board->id,
                             'title' => "Chapter {$ch}: Basics of " . str_replace(" - {$class->name}", "", $subj->name),
                             'chapter_number' => $ch,
+                        ]);
+
+                        // Seed questions for this chapter
+                        $q1 = \App\Models\Question::create([
+                            'board_id' => $board->id,
+                            'class_id' => $class->id,
+                            'subject_id' => $subj->id,
+                            'chapter_id' => $chapter->id,
+                            'type' => 'MCQ',
+                            'question_text' => "What is the fundamental unit of " . str_replace(" - {$class->name}", "", $subj->name) . "?",
+                            'difficulty' => 'Medium',
+                            'marks' => 2,
+                            'language' => 'English',
+                        ]);
+                        \App\Models\MCQOption::create(['question_id' => $q1->id, 'option_text' => 'Option A (Correct)', 'is_correct' => true]);
+                        \App\Models\MCQOption::create(['question_id' => $q1->id, 'option_text' => 'Option B', 'is_correct' => false]);
+                        \App\Models\MCQOption::create(['question_id' => $q1->id, 'option_text' => 'Option C', 'is_correct' => false]);
+                        \App\Models\MCQOption::create(['question_id' => $q1->id, 'option_text' => 'Option D', 'is_correct' => false]);
+
+                        \App\Models\Question::create([
+                            'board_id' => $board->id,
+                            'class_id' => $class->id,
+                            'subject_id' => $subj->id,
+                            'chapter_id' => $chapter->id,
+                            'type' => 'Short',
+                            'question_text' => "Explain the core concepts of " . str_replace(" - {$class->name}", "", $subj->name) . " in your own words.",
+                            'difficulty' => 'Medium',
+                            'marks' => 5,
+                            'language' => 'English',
                         ]);
                     }
                 }

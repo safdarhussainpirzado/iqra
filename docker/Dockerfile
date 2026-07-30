@@ -22,6 +22,10 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Increase PHP upload and post limits
+RUN echo "upload_max_filesize = 30M" > /usr/local/etc/php/conf.d/uploads.ini && \
+    echo "post_max_size = 30M" >> /usr/local/etc/php/conf.d/uploads.ini
+
 WORKDIR /var/www/html
 
 EXPOSE 9000
