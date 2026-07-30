@@ -31,7 +31,7 @@ class IngestionController extends Controller
             'board_id' => 'required|exists:boards,id',
             'class_id' => 'required|exists:classes,id',
             'subject_id' => 'required|exists:subjects,id',
-            'chapter_id' => 'required|exists:chapters,id',
+            'chapter_title' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'run_ocr' => 'nullable|string', // "true" or "false"
         ]);
@@ -46,10 +46,24 @@ class IngestionController extends Controller
 
         $shouldRunOcr = $request->input('run_ocr') === 'true';
 
+        // Resolve or create Chapter
+        $chapter = \App\Models\Chapter::firstOrCreate([
+            'subject_id' => $request->subject_id,
+            'board_id' => $request->board_id,
+            'title' => $request->chapter_title,
+        ], [
+            'chapter_number' => \App\Models\Chapter::where('subject_id', $request->subject_id)
+                                    ->where('board_id', $request->board_id)
+                                    ->max('chapter_number') + 1 ?: 1
+        ]);
+        $chapterId = $chapter->id;
+
         // If it's a PDF and OCR is requested, queue the OCR Job
         if ($shouldRunOcr && strtolower($ext) === 'pdf') {
             // Only pass plain scalar metadata — UploadedFile objects cannot be serialized into the queue
-            $safeMetadata = $request->only(['target_type', 'board_id', 'class_id', 'subject_id', 'chapter_id', 'title', 'type', 'difficulty', 'marks', 'language']);
+            $safeMetadata = $request->only(['target_type', 'board_id', 'class_id', 'subject_id', 'title', 'type', 'difficulty', 'marks', 'language']);
+            $safeMetadata['chapter_id'] = $chapterId;
+
             ProcessOcrJob::dispatch($tempPath, $request->target_type, $safeMetadata);
             
             ActivityLog::create([
@@ -81,7 +95,7 @@ class IngestionController extends Controller
                     'board_id' => $request->board_id,
                     'class_id' => $request->class_id,
                     'subject_id' => $request->subject_id,
-                    'chapter_id' => $request->chapter_id,
+                    'chapter_id' => $chapterId,
                     'title' => $request->title,
                     'file_path' => 'database_only', // we do not keep original files
                     'extracted_text' => $extractedText,
@@ -92,7 +106,7 @@ class IngestionController extends Controller
                     'board_id' => $request->board_id,
                     'class_id' => $request->class_id,
                     'subject_id' => $request->subject_id,
-                    'chapter_id' => $request->chapter_id,
+                    'chapter_id' => $chapterId,
                     'title' => $request->title,
                     'file_path' => 'database_only',
                     'extracted_text' => $extractedText,
@@ -104,23 +118,21 @@ class IngestionController extends Controller
             ActivityLog::create([
                 'user_id' => $request->user()->id,
                 'action' => 'ingest_success',
-                'description' => "Ingested {$request->target_type}: {$request->title} from {$ext} file",
+                'description' => "Successfully parsed and saved {$request->target_type}: {$request->title}",
                 'ip_address' => $request->ip(),
             ]);
 
             return response()->json([
-                'message' => 'File ingested and text extracted successfully.',
+                'message' => 'File ingested and indexed successfully.',
+                'item' => $item,
                 'text' => $extractedText,
-                'item' => $item
-            ], 201);
+            ]);
 
         } catch (Exception $e) {
             if (file_exists($tempPath)) {
                 unlink($tempPath);
             }
-            return response()->json([
-                'message' => 'Ingestion failed: ' . $e->getMessage()
-            ], 500);
+            return response()->json(['message' => $e->getMessage()], 400);
         }
     }
 
@@ -132,9 +144,21 @@ class IngestionController extends Controller
             'board_id' => 'required|exists:boards,id',
             'class_id' => 'required|exists:classes,id',
             'subject_id' => 'required|exists:subjects,id',
-            'chapter_id' => 'required|exists:chapters,id',
+            'chapter_title' => 'required|string|max:255',
             'title' => 'required|string|max:255',
         ]);
+
+        // Resolve or create Chapter
+        $chapter = \App\Models\Chapter::firstOrCreate([
+            'subject_id' => $request->subject_id,
+            'board_id' => $request->board_id,
+            'title' => $request->chapter_title,
+        ], [
+            'chapter_number' => \App\Models\Chapter::where('subject_id', $request->subject_id)
+                                    ->where('board_id', $request->board_id)
+                                    ->max('chapter_number') + 1 ?: 1
+        ]);
+        $chapterId = $chapter->id;
 
         try {
             $extractedText = $this->scraper->import($request->url);
@@ -145,7 +169,7 @@ class IngestionController extends Controller
                     'board_id' => $request->board_id,
                     'class_id' => $request->class_id,
                     'subject_id' => $request->subject_id,
-                    'chapter_id' => $request->chapter_id,
+                    'chapter_id' => $chapterId,
                     'title' => $request->title,
                     'file_path' => $request->url,
                     'extracted_text' => $extractedText,
@@ -156,7 +180,7 @@ class IngestionController extends Controller
                     'board_id' => $request->board_id,
                     'class_id' => $request->class_id,
                     'subject_id' => $request->subject_id,
-                    'chapter_id' => $request->chapter_id,
+                    'chapter_id' => $chapterId,
                     'title' => $request->title,
                     'file_path' => $request->url,
                     'extracted_text' => $extractedText,

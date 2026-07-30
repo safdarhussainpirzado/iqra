@@ -31,15 +31,15 @@
                     <label class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Subject</label>
                     <select x-model="scrapeForm.subject_id" required class="w-full rounded-xl border border-slate-200 bg-white py-3 px-3 text-slate-800 focus:ring-2 focus:ring-blue-500 text-xs outline-none shadow-sm">
                         <option value="">Select Subject</option>
-                        <template x-for="subj in subjects" :key="subj.id"><option :value="subj.id" x-text="subj.name"></option></template>
+                        <template x-for="subj in getFilteredSubjects(scrapeForm.board_id, scrapeForm.class_id)" :key="subj.id">
+                            <option :value="subj.id" x-text="subj.name"></option>
+                        </template>
                     </select>
                 </div>
                 <div class="space-y-1">
                     <label class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Chapter</label>
-                    <select x-model="scrapeForm.chapter_id" required class="w-full rounded-xl border border-slate-200 bg-white py-3 px-3 text-slate-800 focus:ring-2 focus:ring-blue-500 text-xs outline-none shadow-sm">
-                        <option value="">Select Chapter</option>
-                        <template x-for="ch in chapters" :key="ch.id"><option :value="ch.id" x-text="ch.title"></option></template>
-                    </select>
+                    <input type="text" x-model="scrapeForm.chapter_title" required placeholder="E.g., Chapter 1: Introduction"
+                           class="w-full rounded-xl border border-slate-200 bg-white py-3 px-3 text-slate-800 focus:ring-2 focus:ring-blue-500 text-xs outline-none shadow-sm">
                 </div>
             </div>
             

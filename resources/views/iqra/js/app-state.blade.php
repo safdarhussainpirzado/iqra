@@ -137,11 +137,19 @@
 
             // ─── Ingestion ────────────────────────────────────────────────
             uploading:            false,
-            uploadForm:           { file: null, target_type: 'note', board_id: '', class_id: '', subject_id: '', chapter_id: '', title: '', run_ocr: false },
+            uploadForm:           { file: null, target_type: 'note', board_id: '', class_id: '', subject_id: '', chapter_title: '', title: '', run_ocr: false },
             extractedTextPreview: '',
             activeIngestedItem:   null,
             scraping:             false,
-            scrapeForm:           { url: '', target_type: 'note', board_id: '', class_id: '', subject_id: '', chapter_id: '', title: '' },
+            scrapeForm:           { url: '', target_type: 'note', board_id: '', class_id: '', subject_id: '', chapter_title: '', title: '' },
+
+            getFilteredSubjects(boardId, classId) {
+                if (!boardId || !classId) return [];
+                return this.subjects.filter(subj =>
+                    String(subj.class_id) === String(classId) &&
+                    this.chapters.some(ch => String(ch.subject_id) === String(subj.id) && String(ch.board_id) === String(boardId))
+                );
+            },
 
             // ─── Jobs & Queue ─────────────────────────────────────────────
             jobsData:            { pending: [], failed: [], counts: { pending: 0, processing: 0, failed: 0 } },
@@ -478,7 +486,7 @@
                     formData.append('board_id',    this.uploadForm.board_id);
                     formData.append('class_id',    this.uploadForm.class_id);
                     formData.append('subject_id',  this.uploadForm.subject_id);
-                    formData.append('chapter_id',  this.uploadForm.chapter_id);
+                    formData.append('chapter_title', this.uploadForm.chapter_title);
                     formData.append('title',       this.uploadForm.title);
                     formData.append('run_ocr',     this.uploadForm.run_ocr ? 'true' : 'false');
 

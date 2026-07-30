@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
         $admin = User::create([
             'name' => 'IQRA Administrator',
             'email' => 'admin@iqra.edu',
-            'password' => bcrypt('Admin@12345'), // secure default password conforming to guidelines
+            'password' => bcrypt('Admin@12345'),
             'email_verified_at' => now(),
         ]);
         $admin->roles()->attach($roleModels['super-admin']->id);
@@ -94,45 +94,136 @@ class DatabaseSeeder extends Seeder
 
         // 5. Seed Boards
         $boards = [
-            'Federal Board' => 'FBISE',
-            'Sindh Board' => 'SINDH',
-            'Punjab Board' => 'PUNJAB',
-            'KPK Board' => 'KPK',
-            'Gilgit Board' => 'GILGIT',
+            'FG Schools / Federal Board Islamabad' => 'FBISE',
+            'Punjab Boards' => 'PUNJAB',
+            'Sindh Boards' => 'SINDH',
+            'Khyber Pakhtunkhwa Boards (KPK)' => 'KPK',
+            'Balochistan Boards' => 'BALOCHISTAN',
         ];
         $boardModels = [];
         foreach ($boards as $name => $code) {
-            $boardModels[] = Board::create([
+            $boardModels[$code] = Board::create([
                 'name' => $name,
                 'code' => $code,
             ]);
         }
 
-        // 6. Seed Subjects for Class 9 and 10
-        $subjectsData = [
-            'Mathematics' => 'MATH',
-            'Physics' => 'PHYS',
-            'Chemistry' => 'CHEM',
-            'English' => 'ENGL',
+        // 6. Subject data organized by class and board
+        $classSubjects = [
+            12 => [
+                'FBISE' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Pakistan Studies', 'Business Statistics', 'Principles of Accounting'],
+                'PUNJAB' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'Economics', 'Education', 'English', 'Islamic Studies', 'Urdu', 'Pakistan Studies', 'Civics', 'Persian', 'Punjabi', 'Sociology', 'History of Pakistan'],
+                'SINDH' => ['Mathematics', 'Chemistry', 'Physics', 'English', 'Urdu', 'Pakistan Studies'],
+                'KPK' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Pakistan Studies'],
+                'BALOCHISTAN' => [],
+            ],
+            11 => [
+                'FBISE' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Islamiyat (Islamic Education)', 'Business Mathematics', 'Principles of Accounting', 'Basic Statistics'],
+                'PUNJAB' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Islamic Education', 'Civics', 'Economics', 'Education', 'History of Pakistan', 'Islamic Studies', 'Persian', 'Punjabi', 'Sociology'],
+                'SINDH' => ['Mathematics', 'Chemistry', 'Physics', 'English', 'Islamic Education', 'Urdu'],
+                'KPK' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Islamic Education', 'Urdu'],
+                'BALOCHISTAN' => [],
+            ],
+            10 => [
+                'FBISE' => ['Mathematics', 'General Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Islamiyat (Islamic Education)', 'Pakistan Studies', 'General Science', 'Civics'],
+                'PUNJAB' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'English', 'Urdu', 'Islamic Education', 'General Mathematics', 'General Science', 'History of Pakistan', 'Islamic Studies'],
+                'SINDH' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'English', 'Urdu', 'Islamic Education', 'Pakistan Studies', 'General Mathematics', 'Civics', 'Economics', 'Sindhi'],
+                'KPK' => ['Mathematics', 'Chemistry', 'Physics', 'Biology', 'English', 'Islamic Education', 'Pakistan Studies', 'Urdu', 'General Mathematics'],
+                'BALOCHISTAN' => [],
+            ],
+            9 => [
+                'FBISE' => ['Mathematics', 'General Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Islamiyat (Islamic Education)', 'Pakistan Studies', 'General Science', 'Civics'],
+                'PUNJAB' => ['Mathematics', 'General Mathematics', 'Chemistry', 'Physics', 'Biology', 'Computer Science', 'English', 'Urdu', 'Islamic Education', 'Pakistan Studies', 'General Science', 'Islamic Studies'],
+                'SINDH' => ['Mathematics', 'General Mathematics', 'Chemistry', 'Physics', 'Biology', 'English', 'Urdu', 'Islamic Education', 'Pakistan Studies', 'Civics', 'Economics'],
+                'KPK' => ['Mathematics', 'General Mathematics', 'Chemistry', 'Physics', 'Biology', 'English', 'Urdu', 'Islamic Education', 'Pakistan Studies'],
+                'BALOCHISTAN' => [],
+            ],
+            8 => [
+                'FBISE' => ['Mathematics', 'General Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat', 'Electric'],
+                'PUNJAB' => ['Mathematics', 'Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat', 'Arabic', 'Agriculture', 'Home Economics'],
+                'SINDH' => ['Mathematics', 'General Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat', 'Arabic', 'Sindhi'],
+                'KPK' => ['Mathematics', 'General Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat', 'Arabic', 'Pashto', 'Home Economics', 'Health & Physical Education', 'Drawing'],
+                'BALOCHISTAN' => ['Mathematics', 'General Science', 'English', 'History', 'Geography', 'Computer', 'Urdu', 'Islamiyat', 'Tarjama-tul-Quran', 'Arabic (Old Course)'],
+            ],
+            7 => [
+                'FBISE' => ['Mathematics', 'General Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat'],
+                'PUNJAB' => ['Mathematics', 'Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat', 'Arabic', 'Agriculture', 'Home Economics'],
+                'SINDH' => ['Mathematics', 'Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat', 'Arabic', 'Sindhi'],
+                'KPK' => ['Mathematics', 'General Science', 'English', 'History', 'Geography', 'Computer Science', 'Islamiyat', 'Urdu', 'Home Economics', 'Health & Physical Education', 'Arabic', 'Pashto', 'Drawing'],
+                'BALOCHISTAN' => ['Mathematics', 'Science', 'English', 'History', 'Geography', 'Computer', 'Urdu', 'Islamiyat', 'Tarjama-tul-Quran', 'Arabic (Old Course)'],
+            ],
+            6 => [
+                'FBISE' => ['Mathematics', 'General Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat'],
+                'PUNJAB' => ['Mathematics', 'Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat', 'Arabic', 'Agriculture', 'Home Economics'],
+                'SINDH' => ['Mathematics', 'Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat', 'Arabic', 'Sindhi'],
+                'KPK' => ['Mathematics', 'Science', 'English', 'Computer', 'History', 'Geography', 'Urdu', 'Islamiyat', 'Arabic', 'Home Economics', 'Health & Physical Education', 'Pashto', 'Drawing'],
+                'BALOCHISTAN' => ['Mathematics', 'General Science', 'English', 'History', 'Geography', 'Computer', 'Urdu', 'Islamiyat', 'Tarjamat-ul-Quran', 'Arabic(Old Course)'],
+            ],
+            5 => [
+                'FBISE' => ['Mathematics', 'General Science', 'English', 'Urdu', 'Islamiyat', 'Social Studies'],
+                'PUNJAB' => ['Mathematics', 'Science', 'English', 'Pakistan Studies', 'Urdu', 'Islamiyat'],
+                'SINDH' => ['English', 'Pakistan Studies', 'Science', 'Sindhi', 'Urdu'],
+                'KPK' => ['Mathematics', 'General Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat', 'Pashto'],
+                'BALOCHISTAN' => ['Mathematics', 'General Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat'],
+            ],
+            4 => [
+                'FBISE' => ['Mathematics', 'General Science', 'English', 'Urdu', 'Islamiyat', 'Social Studies'],
+                'PUNJAB' => ['Mathematics', 'General Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat'],
+                'SINDH' => ['Mathematics', 'Science', 'English', 'Social Studies', 'Sindhi'],
+                'KPK' => ['Mathematics', 'General Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat', 'Pashto'],
+                'BALOCHISTAN' => ['Mathematics', 'Science', 'English', 'Social Studies', 'Urdu', 'Islamiyat'],
+            ],
+            3 => [
+                'FBISE' => ['Mathematics', 'English', 'General Knowledge', 'Urdu', 'Islamiyat'],
+                'PUNJAB' => ['Mathematics', 'English', 'General Knowledge', 'Urdu', 'Islamiyat'],
+                'SINDH' => [],
+                'KPK' => [],
+                'BALOCHISTAN' => [],
+            ],
+            2 => [
+                'FBISE' => [],
+                'PUNJAB' => [],
+                'SINDH' => [],
+                'KPK' => [],
+                'BALOCHISTAN' => [],
+            ],
+            1 => [
+                'FBISE' => [],
+                'PUNJAB' => [],
+                'SINDH' => [],
+                'KPK' => [],
+                'BALOCHISTAN' => [],
+            ],
         ];
 
-        foreach ([$classes[9], $classes[10]] as $class) {
-            foreach ($subjectsData as $name => $code) {
-                $subj = Subject::create([
-                    'class_id' => $class->id,
-                    'name' => "{$name} - {$class->name}",
-                    'code' => "{$code}-{$class->level}",
-                ]);
+        // Seed subjects for all classes and boards
+        foreach ($classSubjects as $classLevel => $boardsData) {
+            $class = $classes[$classLevel];
+            foreach ($boardsData as $boardCode => $subjects) {
+                if (empty($subjects)) continue;
+                $board = $boardModels[$boardCode];
+                foreach ($subjects as $subjectName) {
+                    $code = strtoupper(substr(str_replace([' ', '-', '(', ')'], '', $subjectName), 0, 4));
+                    $subj = Subject::firstOrCreate(
+                        ['code' => "{$code}-{$class->level}"],
+                        [
+                            'class_id' => $class->id,
+                            'name' => "{$subjectName} - {$class->name}",
+                        ]
+                    );
 
-                // Create a couple of demo chapters per subject per board
-                foreach ($boardModels as $board) {
+                    // Create demo chapters
                     for ($ch = 1; $ch <= 2; $ch++) {
-                        $chapter = Chapter::create([
-                            'subject_id' => $subj->id,
-                            'board_id' => $board->id,
-                            'title' => "Chapter {$ch}: Basics of " . str_replace(" - {$class->name}", "", $subj->name),
-                            'chapter_number' => $ch,
-                        ]);
+                        $chapter = Chapter::firstOrCreate(
+                            [
+                                'subject_id' => $subj->id,
+                                'board_id' => $board->id,
+                                'chapter_number' => $ch
+                            ],
+                            [
+                                'title' => "Chapter {$ch}: Basics of {$subjectName}",
+                            ]
+                        );
 
                         // Seed questions for this chapter
                         $q1 = \App\Models\Question::create([
@@ -141,7 +232,7 @@ class DatabaseSeeder extends Seeder
                             'subject_id' => $subj->id,
                             'chapter_id' => $chapter->id,
                             'type' => 'MCQ',
-                            'question_text' => "What is the fundamental unit of " . str_replace(" - {$class->name}", "", $subj->name) . "?",
+                            'question_text' => "What is the fundamental unit of {$subjectName}?",
                             'difficulty' => 'Medium',
                             'marks' => 2,
                             'language' => 'English',
@@ -157,7 +248,7 @@ class DatabaseSeeder extends Seeder
                             'subject_id' => $subj->id,
                             'chapter_id' => $chapter->id,
                             'type' => 'Short',
-                            'question_text' => "Explain the core concepts of " . str_replace(" - {$class->name}", "", $subj->name) . " in your own words.",
+                            'question_text' => "Explain the core concepts of {$subjectName} in your own words.",
                             'difficulty' => 'Medium',
                             'marks' => 5,
                             'language' => 'English',
