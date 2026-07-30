@@ -9,7 +9,12 @@ class Board extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name', 'code', 'board_group_id', 'slug', 'is_active'];
+
+    public function boardGroup()
+    {
+        return $this->belongsTo(BoardGroup::class);
+    }
 
     public function chapters()
     {

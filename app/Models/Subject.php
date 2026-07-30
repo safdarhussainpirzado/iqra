@@ -9,7 +9,7 @@ class Subject extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['class_id', 'name', 'code'];
+    protected $fillable = ['class_id', 'name', 'code', 'slug', 'icon', 'color_hex'];
 
     public function class()
     {

@@ -1,0 +1,1137 @@
+[
+  {
+    "num": 1,
+    "title": "Emerging Technologies",
+    "tag": "Robotics · AI · VR/AR · Ports · Peripherals",
+    "blurb": "From self-driving cars to holograms — the technologies reshaping tomorrow, plus every port and peripheral your computer relies on.",
+    "color": "#10B981",
+    "available": true,
+    "sections": [
+      {
+        "key": "tick",
+        "label": "Tick the Answer",
+        "count": 10
+      },
+      {
+        "key": "brief",
+        "label": "Brief Q&A",
+        "count": 13
+      },
+      {
+        "key": "detailed",
+        "label": "Detailed Q&A",
+        "count": 3
+      },
+      {
+        "key": "functions",
+        "label": "Functions",
+        "count": 5
+      },
+      {
+        "key": "mcq",
+        "label": "MCQs",
+        "count": 32
+      },
+      {
+        "key": "crq",
+        "label": "CRQs",
+        "count": 24
+      }
+    ],
+    "tick": [
+      {
+        "q": "Emerging Technology includes:",
+        "options": [
+          "robotics",
+          "Artificial intelligence",
+          "Self-driven cars",
+          "All"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "The goal of ____ is to make device act and think like human.",
+        "options": [
+          "Artificial Intelligence",
+          "3D printing",
+          "Virtual Reality",
+          "Augmented Reality"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "A self-driving is car, also known as:",
+        "options": [
+          "Robotic car",
+          "Beautiful Car",
+          "Automatic car",
+          "Manual car"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "____ is the integration of real-world environment and computer-generated content.",
+        "options": [
+          "VR",
+          "AR",
+          "CR",
+          "All"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "A three-dimensional image created with projection is called:",
+        "options": [
+          "Telegrams",
+          "histogram",
+          "hologram",
+          "Photogram"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "A ____ is a physical point on a computer using which an external device can be connected to the computer.",
+        "options": [
+          "Device",
+          "Peripheral",
+          "Port",
+          "Drive"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "USB stands for:",
+        "options": [
+          "Unique Series Bus",
+          "Unique State Bus",
+          "Universal State Bus",
+          "Universal Serial Bus"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "GPU is added in computer using:",
+        "options": [
+          "SATA",
+          "USB",
+          "HDMI",
+          "PCIe"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "Computer peripheral are:",
+        "options": [
+          "Input devices",
+          "Output devices",
+          "Processing devices",
+          "Both a and b"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "The devices which sends data to computer are known as:",
+        "options": [
+          "Input devices",
+          "Processing devices",
+          "Output devices",
+          "Both a and b"
+        ],
+        "correct": 0
+      }
+    ],
+    "brief": [
+      {
+        "q": "Discuss Robotics and its applications.",
+        "a": [
+          "<strong>Robotics:</strong> Robotics is an interdisciplinary branch of computer science and mechanical engineering that involves the design, manufacture, operation and use of robots. Robotics aims to create intelligent machines that can assist humans in various ways.",
+          "<strong>Applications:</strong> Robots are mostly used in: (i) Manufacturing industries (ii) The medical field (iii) Agriculture (iv) The military (v) Entertainment."
+        ]
+      },
+      {
+        "q": "What is Artificial Intelligence? How is it helpful for humans?",
+        "a": [
+          "<strong>Artificial Intelligence (AI):</strong> AI refers to technologies that enable devices to perform tasks and make decisions in ways similar to humans. AI can include features such as voice recognition and decision-making.",
+          "<strong>Helpful for Humans:</strong> AI has the potential to be helpful to humans by automating routine tasks, improving efficiency, and enabling new forms of innovation and discovery. However, it is important to consider ethical and societal implications as AI becomes more integrated into our daily lives."
+        ]
+      },
+      {
+        "q": "Who does operate a self-driven car?",
+        "a": [
+          "As the name suggests, a self-driving car operates autonomously, meaning it does not require a human driver to control it. Instead, the car's sensors and software handle tasks such as navigating, accelerating, and braking."
+        ]
+      },
+      {
+        "q": "Differentiate between 2D and 3D printing.",
+        "a": [
+          "Difference between 2D and 3D printing:"
+        ],
+        "table": {
+          "head": [
+            "Aspect",
+            "2D Printing",
+            "3D Printing"
+          ],
+          "rows": [
+            [
+              "Definition",
+              "Prints a two-dimensional image or text onto a flat surface.",
+              "Creates a three-dimensional physical object from a digital design."
+            ],
+            [
+              "Resulting Product",
+              "Flat image or text.",
+              "Physical object with depth and volume."
+            ],
+            [
+              "Manufacturing Process",
+              "Printing onto a surface.",
+              "Adding material layer by layer until the final object is complete."
+            ],
+            [
+              "Complexity",
+              "Limited to flat images or text.",
+              "Can produce objects with complex shapes and structures."
+            ]
+          ]
+        }
+      },
+      {
+        "q": "Write down the functions of the USB Port.",
+        "a": [
+          "<strong>Functions of the USB Port:</strong> The USB (Universal Serial Bus) port serves as a plug-and-play interface that enables a computer to communicate with various peripherals and devices. Some functions include:",
+          "(1) Connecting a wide range of peripherals and devices to a computer, such as computer keyboards and mice, printers, disk drives, network adapters, video cameras, portable media players, and mobile digital telephones.",
+          "(2) Providing a convenient and standardized method for connecting and disconnecting devices without the need to shut down the computer.",
+          "(3) Enabling high-speed data transfer between the computer and connected devices.",
+          "(4) Replacing older types of connectors, such as PS/2, game, serial, and parallel ports, which are now obsolete.",
+          "Overall, the USB port serves as a versatile and widely-used interface for connecting devices to a computer."
+        ]
+      },
+      {
+        "q": "Differentiate between Type-C and HDMI ports.",
+        "a": [
+          "Difference between Type-C and HDMI ports:"
+        ],
+        "table": {
+          "head": [
+            "Aspect",
+            "Type-C Port",
+            "HDMI Port"
+          ],
+          "rows": [
+            [
+              "Design",
+              "USB port with 24 pins",
+              "Digital interface"
+            ],
+            [
+              "Usage",
+              "Used for fast charging and data transfer",
+              "Used to transfer high-definition video signals"
+            ],
+            [
+              "Orientation",
+              "Has no up or down orientation",
+              "Not applicable"
+            ],
+            [
+              "Resolution",
+              "Not applicable",
+              "Can transfer video signals up to a resolution of 4096x2160"
+            ]
+          ]
+        }
+      },
+      {
+        "q": "What is the usage of SATA port?",
+        "a": [
+          "<strong>Usage of the SATA Port:</strong> The usage of the SATA port is to enable storage devices, such as hard drives and optical drives, to communicate with the motherboard using a high-speed serial cable over two pairs of conductors. This allows for efficient and durable connection of external hard drives to the motherboard, and the ability to plug hard drives in and out of the ports without switching off the computer."
+        ]
+      },
+      {
+        "q": "For which purpose do we use PCIe?",
+        "a": [
+          "<strong>Use of PCIe:</strong> PCIe slots can be used to add various components such as GPUs (video cards, graphics cards), Wi-Fi cards, or SSD cards to a desktop PC. Therefore, the purpose of using PCIe is to expand and enhance the functionality of a computer system by adding high-speed components via the PCIe interface."
+        ]
+      },
+      {
+        "q": "Discuss Computer Peripherals.",
+        "a": [
+          "<strong>Computer Peripherals:</strong> Peripheral devices are also known as Peripherals, computer peripherals or input/output devices.",
+          "<strong>Kinds of Peripherals:</strong> Peripherals are commonly divided into three kinds: (1) Input Devices (2) Output Devices (3) Storage Devices."
+        ]
+      },
+      {
+        "q": "Differentiate between Hovering and scrolling.",
+        "a": [
+          "Difference between Hovering and scrolling:"
+        ],
+        "table": {
+          "head": [
+            "Aspect",
+            "Hovering",
+            "Scrolling"
+          ],
+          "rows": [
+            [
+              "Definition",
+              "Moving the mouse pointer over an object",
+              "Moving the scrollbar up and down using the mouse scroll button"
+            ],
+            [
+              "Action",
+              "Triggers a response such as changing the colour of links",
+              "Moves the document or webpage up and down"
+            ],
+            [
+              "Usage",
+              "Used to click on links or activate functions by hovering over an object",
+              "Used to move to different parts of a large document or webpage"
+            ],
+            [
+              "Mechanism",
+              "The mouse pointer is moved over the object",
+              "The scrollbar is moved up and down using the mouse scroll button"
+            ]
+          ]
+        }
+      },
+      {
+        "q": "Discuss printers and their types.",
+        "a": [
+          "<strong>Printers:</strong> A printer is an output device that prints on paper. Printers print text documents, images, or a combination of both. The two most common types of printers are inkjet and laser printers. Laser printers are a typical choice for businesses as well as individuals.",
+          "<strong>Types of Printers:</strong>",
+          "(1) <strong>Inkjet printers:</strong> Inkjet printers recreate a digital image by spraying ink on paper and are mostly used as personal printers.",
+          "(2) <strong>Laser Printers:</strong> Laser printers are used to create high-quality prints by passing a laser beam at high speed over a negatively charged drum to create an image. Colour laser printers are more often found in offices.",
+          "(3) <strong>3D Printers:</strong> 3D printers are a relatively new printer technology. 3D printing creates a physical object from a digital file by adding layer upon layer of material until the print job is complete and the object is whole.",
+          "(4) <strong>LED Printers:</strong> LED printers are similar to laser printers but use a light-emitting diode array in the print head instead of a laser."
+        ]
+      },
+      {
+        "q": "For which purposes do we use Scanner?",
+        "a": [
+          "We use a scanner as an input device to capture images from paper and convert them into a digital form that can be stored in a computer. This allows users to edit and modify the captured images before printing them, and to store them in a digital format for long-term preservation and easier sharing. The main purposes of using a scanner are to digitise physical documents, images, or other visual materials, and to facilitate their manipulation and sharing using digital technology."
+        ]
+      },
+      {
+        "q": "Discuss the main properties of the Scanner.",
+        "a": [
+          "<strong>Properties of a Scanner:</strong>",
+          "(1) <strong>Resolution:</strong> One of the essential features of the scanner is the resolution that it is capable of capturing, measured in dots per inch. More dots per inch means higher quality of scanning.",
+          "(2) <strong>Colour depth:</strong> Colour depth refers to the number of bits needed for the representation of the colour of each pixel. The higher the colour depth, the more colours the scanner can capture.",
+          "(3) <strong>Recognition:</strong> To scan a document, optical character recognition is essential. The computer must convert the file to a text document to identify alphanumeric characters. A scanner provides this facility."
+        ]
+      }
+    ],
+    "detailed": [
+      {
+        "q": "Define Emerging Technology, discuss three real-world examples.",
+        "a": [
+          "<strong>Emerging Technology:</strong> The term emerging technology is generally used to describe new technology. It may also refer to the advancement in existing technology. The development of emerging technologies also refers to technical, institutional and social changes.",
+          "<strong>Characteristics:</strong> (i) Innovation (ii) Fast growth (iii) Consistency (iv) Prominent impact. Emerging technologies have created new opportunities and challenges related to copyrights, patents, licensing etc.",
+          "<strong>Examples:</strong> (i) Robotics (ii) Artificial Intelligence (iii) Self-Driving Cars (iv) 3D Printing (v) Virtual Reality (vi) Augmented Reality (vii) 3D and Holographic Imaging.",
+          "<strong>(1) Robotics:</strong> An interdisciplinary branch of computer science and mechanical engineering that involves the design, manufacture, operation and use of robots, mostly used in manufacturing industries, the medical field, agriculture, the military, and entertainment.",
+          "<strong>(2) Artificial Intelligence (AI):</strong> Technologies that make devices act and think like a human. Voice recognition and decision-making are features of human intelligence that AI may possess.",
+          "<strong>(3) Self-driving cars:</strong> A self-driving car, also known as a robotic car, is capable of sensing its environment and moving safely with little or no human input. Companies such as Google and Tesla have been developing and using self-driven cars for several years."
+        ]
+      },
+      {
+        "q": "What is Holographic imaging? Discuss its application.",
+        "a": [
+          "<strong>Holographic imaging:</strong> A hologram is a three-dimensional image, created with photographic projection. Unlike 3D or virtual reality on a two-dimensional computer display, a hologram is a truly three-dimensional and free-standing image.",
+          "<strong>Applications:</strong>",
+          "(1) <strong>Art and Entertainment:</strong> Used in art installations, performances, and exhibitions to create interactive and immersive experiences, and in film/television for special effects and realistic animations.",
+          "(2) <strong>Medical Imaging:</strong> Used in medical research and diagnosis to create detailed and accurate 3D models of human anatomy for surgical planning, training, and education.",
+          "(3) <strong>Security:</strong> Used in security features on credit cards, passports, and other important documents to prevent counterfeiting, and in authentication and verification systems.",
+          "(4) <strong>Education:</strong> Used in education and training to create interactive and immersive learning experiences, and in museums and historical sites for virtual tours and exhibits.",
+          "(5) <strong>Industrial Design and Manufacturing:</strong> Used in product design and prototyping to create 3D models and simulations, and to improve quality control and reduce errors."
+        ]
+      },
+      {
+        "q": "Discuss Computer Ports and their types.",
+        "a": [
+          "<strong>Computer Ports:</strong> A port is a physical point or a jack provided on a computer using which an external device can be connected to the computer.",
+          "<strong>Working/Functioning:</strong> It acts as an interface or point of attachment between the computer and external devices, and can also be a point through which information flows from a program to the computer or over the Internet.",
+          "<strong>Types:</strong> (i) USB Port (ii) Type-C Port (iii) HDMI Port (iv) SATA Port.",
+          "<strong>USB Port:</strong> A plug-and-play interface that allows a computer to communicate with peripherals and other devices, replacing older PS/2, game, serial, and parallel ports. Peripherals connected via USB include keyboards, mice, video cameras, printers, portable media players, disk drives, and network adapters.",
+          "<strong>USB Specifications — Versions:</strong>"
+        ],
+        "table": {
+          "head": [
+            "Version",
+            "Known Name",
+            "Year Introduced",
+            "Data Rate",
+            "Power Capabilities"
+          ],
+          "rows": [
+            [
+              "USB v1.1",
+              "N/A",
+              "1998",
+              "12 Mbps",
+              "150mA @ 5V, 0.75 Watts"
+            ],
+            [
+              "USB v2.0",
+              "High Speed USB",
+              "2000",
+              "480 Mbps",
+              "500mA @ 5V, 2.5 Watts"
+            ],
+            [
+              "USB v3.0",
+              "Super Speed USB",
+              "2008",
+              "5 Gbps",
+              "1.5A @ 5V, 7.5 Watts"
+            ],
+            [
+              "USB v3.1",
+              "Super Speed USB",
+              "2013",
+              "10 Gbps",
+              "20A @ 5V, 12V, 20V – 100 Watts"
+            ]
+          ]
+        }
+      }
+    ],
+    "functions": [
+      {
+        "q": "HDMI Port",
+        "a": "HDMI stands for High-Definition Media Interface and is used to transfer high-quality audio and video signals between devices such as computers, televisions, and gaming consoles, using a single cable."
+      },
+      {
+        "q": "Type-C Port",
+        "a": "The latest design of the USB port, with 24 pins. Used for fast charging and high-speed data transfer. Has no up or down orientation, making it easier to plug in devices."
+      },
+      {
+        "q": "SATA Port",
+        "a": "Stands for Serial Advanced Technology Attachment. Connects storage devices such as hard drives and optical drives to a motherboard, enabling high-speed data transfer and hot-swapping."
+      },
+      {
+        "q": "Graphic Card",
+        "a": "A hardware component that generates and outputs images to a display device such as a monitor, designed to handle complex graphics processing tasks like rendering 3D images, gaming, or CAD software."
+      },
+      {
+        "q": "Webcam",
+        "a": "An input device that captures video and audio for real-time communication over the internet — commonly used for video conferencing, online streaming, and recording videos."
+      }
+    ],
+    "mcq": [
+      {
+        "q": "What does the term \"emerging technology\" generally describe?",
+        "options": [
+          "A new technology",
+          "Advancements in existing technology",
+          "A new technology and advancements in existing technology",
+          "None of the above"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "Which of the following is NOT an important characteristic of emerging technology?",
+        "options": [
+          "Innovation",
+          "Fast growth",
+          "Consistency",
+          "Prominent impact"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What are some of the challenges related to emerging technologies?",
+        "options": [
+          "Political, economic, and social changes",
+          "Copyrights, patents, and licensing issues",
+          "Cultural, linguistic, and religious differences",
+          "Environmental, health, and safety concerns"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "In which field, robots are mostly used?",
+        "options": [
+          "Manufacturing industries",
+          "Education",
+          "Tourism",
+          "Retail"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What does \"AI\" stand for?",
+        "options": [
+          "Advanced Interface",
+          "Automated Intelligence",
+          "Artificial Intelligence",
+          "Actual Interaction"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "Which companies have been developing and using self-driving cars?",
+        "options": [
+          "Facebook",
+          "Apple",
+          "Google",
+          "Microsoft"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What is the primary application of virtual reality?",
+        "options": [
+          "Entertainment",
+          "Education",
+          "Medical and manufacturing industries",
+          "None of the above"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What is the main benefit of using artificial intelligence in devices?",
+        "options": [
+          "They can act and think like a human",
+          "They can perform tasks faster than humans",
+          "They can communicate in any language",
+          "None of the above"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What is the primary purpose of self-driving cars?",
+        "options": [
+          "To reduce traffic congestion",
+          "To provide a more comfortable driving experience",
+          "To make driving safer and more efficient",
+          "None of the above"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What is the main benefit of 3D printing?",
+        "options": [
+          "It allows for the creation of complex shapes and designs",
+          "It is a cheaper alternative to traditional manufacturing methods",
+          "It is a faster alternative to traditional manufacturing methods",
+          "None of the above"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What is the primary application of holographic imaging?",
+        "options": [
+          "Education",
+          "Entertainment",
+          "Medical and scientific research",
+          "None of the above"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "Which of the following is NOT a challenge related to emerging technologies?",
+        "options": [
+          "Legal and regulatory issues",
+          "Ethical and social considerations",
+          "Environmental and safety concerns",
+          "Consistency and reliability"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "What does USB stand for?",
+        "options": [
+          "Universal Serial Bus",
+          "Ultra Slim Battery",
+          "Underlying Serial Bridge",
+          "Unique Serial Bandwidth"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "Which version of USB was introduced in the year 2000?",
+        "options": [
+          "USB v1.1",
+          "USB v2.0",
+          "USB v3.0",
+          "USB v3.1"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "What is the maximum data transfer rate for USB v3.0?",
+        "options": [
+          "5 Mbps",
+          "12 Mbps",
+          "480 Mbps",
+          "5 Gbps"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "What is the distinguishing feature of a Type-C USB port?",
+        "options": [
+          "It has 24 pins",
+          "It has no up or down orientation",
+          "It is used for fast charging",
+          "It can handle a current of 3A"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "What does HDMI stand for?",
+        "options": [
+          "High Definition Media Interface",
+          "High Digital Multimedia Interface",
+          "Hyper Definition of Media Integration",
+          "Hyper Digital Multimedia Interchange"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What is the resolution limit for the advanced version of HDMI?",
+        "options": [
+          "1920x1080",
+          "2560x1440",
+          "3840x2160",
+          "4096x2160"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "What does SATA stand for?",
+        "options": [
+          "Series Advanced Technology Attachment",
+          "Serial Advanced Technology Attachment",
+          "SCSI Advanced Technology Attachment",
+          "SCSI Advanced Technology Attachment"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "What kind of devices can be connected using a SATA port?",
+        "options": [
+          "Printers",
+          "Webcams",
+          "Hard drives",
+          "Scanners"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What does PCI stand for?",
+        "options": [
+          "Peripheral Component Interface",
+          "Peripheral Component Interchange",
+          "Peripheral Computer Interface",
+          "Peripheral Computer Interconnect"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What kind of workloads are GPUs suited for?",
+        "options": [
+          "Serial workloads",
+          "Parallel workloads",
+          "Both serial and parallel workloads",
+          "None of the above"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "What is the most popular input device for a computer?",
+        "options": [
+          "Printer",
+          "Scanner",
+          "Keyboard",
+          "Webcams"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What are the components of a standard computer keyboard?",
+        "options": [
+          "Typing keys, Control Keys, Navigation keys",
+          "Control keys, Numeric keypad, Printers",
+          "Function keys, Navigation keys, Printers",
+          "Typing keys, Function keys, Numeric keypad, Control keys, Navigation keys"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "What are the two most common types of printers?",
+        "options": [
+          "Inkjet and laser printers",
+          "Inkjet and 3D printers",
+          "LED printers and 3D printers",
+          "Laser printers and LED printers"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What is a scanner's essential feature that determines the scanning quality?",
+        "options": [
+          "Recognition",
+          "Resolution",
+          "Color depth",
+          "Compatibility"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "What is the function of a webcam?",
+        "options": [
+          "To print documents",
+          "To scan documents",
+          "To record or stream videos",
+          "To process graphical data"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "Which component of a computer is primarily designed to remove the graphical processing tasks from the processor or RAM?",
+        "options": [
+          "Keyboard",
+          "Printer",
+          "Scanner",
+          "Graphics card"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "What is the measure of the resolution of a scanner?",
+        "options": [
+          "Color depth",
+          "Recognition",
+          "Dots per inch",
+          "Compatibility"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "What is the function of the numeric keypad on a keyboard?",
+        "options": [
+          "To input data into the computer",
+          "To move around documents or web pages",
+          "To perform specific tasks",
+          "To enter numbers quickly"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "Which type of printer is mostly used as personal printers?",
+        "options": [
+          "Inkjet printers",
+          "Laser printers",
+          "3D printers",
+          "LED printers"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "What is the essential feature of a graphics card that provides a high-quality visual display?",
+        "options": [
+          "Advanced graphical techniques",
+          "Dedicated RAM",
+          "Dedicated graphical processing unit",
+          "Processing and executing graphical data"
+        ],
+        "correct": 2
+      }
+    ],
+    "crq": [
+      {
+        "q": "What is 3D printing and how does it work?",
+        "a": [
+          "3D printing is a process that creates a physical object from a digital design. It works by layering materials on top of each other until the object is fully formed."
+        ]
+      },
+      {
+        "q": "In what industries is VR technology widely used?",
+        "a": [
+          "VR technology is widely used in the medical and manufacturing industries."
+        ]
+      },
+      {
+        "q": "What is an input device, and give some examples?",
+        "a": [
+          "An input device is any hardware device that sends data to a computer, allowing you to interact with and control it. Examples include keyboards, mice, and scanners."
+        ]
+      },
+      {
+        "q": "What is an output device, and give some examples?",
+        "a": [
+          "An output device is a piece of computer hardware that receives data from a computer and translates it into audio, visual, textual, or hard copy such as a printed document. Examples include monitors, printers, and speakers."
+        ]
+      },
+      {
+        "q": "How does a scanner work, and what is it used for?",
+        "a": [
+          "A scanner is an input device that works like a photocopy machine. It captures images from paper and converts them into a digital form that can be stored in a computer, used when information needs to be transferred from paper for further manipulation."
+        ]
+      },
+      {
+        "q": "What is the purpose of a webcam, and how is it used?",
+        "a": [
+          "A webcam is a video camera attached to a computer to record or stream video. It is primarily used for live-streaming or social media, and can be used for still images, video recording, and video conferencing."
+        ]
+      },
+      {
+        "q": "What is a graphics card, and how does it work?",
+        "a": [
+          "A graphics card is an expansion card that generates output images to a display device, such as a monitor. It provides high-quality visual display by processing and executing graphical data using advanced graphical techniques. It is primarily designed to remove graphical processing tasks from the processor or RAM, and includes a dedicated GPU and dedicated RAM."
+        ]
+      },
+      {
+        "q": "What is 3D imaging, and why is it important in industrial and consumer applications?",
+        "a": [
+          "3D imaging is a process of creating a three-dimensional image on a two-dimensional surface. It is important because it can be used for product design, prototyping, and quality control, among other things."
+        ]
+      },
+      {
+        "q": "Differentiate between CPU and GPU Architecture.",
+        "a": [
+          "Difference between CPU and GPU Architecture:"
+        ],
+        "table": {
+          "head": [
+            "CPU",
+            "GPU"
+          ],
+          "rows": [
+            [
+              "Stands for Central Processing Unit",
+              "Stands for Graphics Processing Unit"
+            ],
+            [
+              "Few strong cores",
+              "Thousands of weaker cores"
+            ],
+            [
+              "Suited for serial workloads",
+              "Suited for parallel workloads"
+            ],
+            [
+              "Quick access to System Memory (RAM)",
+              "Can only access RAM quickly"
+            ]
+          ]
+        }
+      },
+      {
+        "q": "What are some examples of input devices?",
+        "a": [
+          "Keyboard, mouse, scanner, webcam, and microphone are some examples of input devices."
+        ]
+      },
+      {
+        "q": "How does a scanner work as an input device?",
+        "a": [
+          "A scanner captures images from paper and converts them into a digital form that can be stored in the computer. These images can be edited before they are printed."
+        ]
+      },
+      {
+        "q": "What is the primary purpose of a webcam?",
+        "a": [
+          "A webcam is primarily used for live-streaming or social media. It can also be used for still images, video recording, and video conferencing."
+        ]
+      },
+      {
+        "q": "What is a graphics card and how does it work?",
+        "a": [
+          "A graphics card is an expansion card that generates output images to a display device, such as a computer monitor. It processes and executes graphical data using advanced techniques and functions to provide high-quality visual display."
+        ]
+      },
+      {
+        "q": "What are some examples of output devices?",
+        "a": [
+          "Monitor, printer, speakers, and projector are some examples of output devices."
+        ]
+      },
+      {
+        "q": "What is 3D imaging and why is it important in industrial and consumer applications?",
+        "a": [
+          "3D imaging is the process of creating a three-dimensional image on a two-dimensional surface. It is important because it allows for more accurate and detailed representations of objects and structures."
+        ]
+      },
+      {
+        "q": "How is virtual reality technology used in the medical and manufacturing industries?",
+        "a": [
+          "Virtual reality technology is used in the medical industry to simulate surgical procedures and train medical professionals. In the manufacturing industry, it is used for product design and prototyping."
+        ]
+      },
+      {
+        "q": "What is the role of augmented reality in medical science?",
+        "a": [
+          "Augmented reality can be used in medical science for applications such as medical training, assisting in surgeries, and visualisation of medical imaging data."
+        ]
+      },
+      {
+        "q": "How does a joystick work as an input device?",
+        "a": [
+          "A joystick is an input device typically used for gaming. It allows the user to control the movement of a game character by moving the joystick in different directions."
+        ]
+      },
+      {
+        "q": "What is a trackball and how does it work as an input device?",
+        "a": [
+          "A trackball is an input device that functions like a mouse, but with a ball on top used to control the cursor. The user rotates the ball with their fingers to move the cursor on the screen."
+        ]
+      },
+      {
+        "q": "How does a microphone work as an input device?",
+        "a": [
+          "A microphone is an input device that converts sound waves into an electrical signal that can be processed by a computer. It is commonly used for recording audio or for voice communication."
+        ]
+      },
+      {
+        "q": "How does a touchscreen work as an input device?",
+        "a": [
+          "A touchscreen is an input device that allows the user to interact with a computer by touching the screen with their fingers. The screen uses sensors to detect the location and pressure of the user's touch."
+        ]
+      },
+      {
+        "q": "What are some common applications of 3D imaging technology in consumer products?",
+        "a": [
+          "3D imaging technology can be used in smartphones for facial recognition, video games for more realistic graphics, and virtual try-on features for online shopping."
+        ]
+      },
+      {
+        "q": "What is the purpose of a graphics card in a computer?",
+        "a": [
+          "A graphics card is responsible for processing and rendering visual data that is outputted to a display device such as a monitor. It takes the load off the CPU and allows for high-quality visual display."
+        ]
+      },
+      {
+        "q": "What are some examples of advanced graphical techniques used by a graphics card?",
+        "a": [
+          "Advanced graphical techniques used by a graphics card can include ray tracing, anti-aliasing, and texture filtering, which improve the quality of images and reduce visual artifacts."
+        ]
+      }
+    ]
+  },
+  {
+    "num": 2,
+    "title": "Digital Skills",
+    "tag": "MS Word · PowerPoint · Email basics (preview)",
+    "blurb": "Word processing, formatting, presentations, and safe email habits — a preview of the digital skills every student needs.",
+    "color": "#D946EF",
+    "available": true,
+    "sections": [
+      {
+        "key": "tick",
+        "label": "Tick the Answer",
+        "count": 15
+      },
+      {
+        "key": "brief",
+        "label": "Brief Q&A",
+        "count": 1
+      }
+    ],
+    "tick": [
+      {
+        "q": "To open a word document, we go to the ___ tab.",
+        "options": [
+          "Open",
+          "File",
+          "Home",
+          "Insert"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "___ is a word processor, that allows us to enter, format, save and print text.",
+        "options": [
+          "MS Excel",
+          "MS PowerPoint",
+          "MS Word",
+          "MS Paint"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "We can format the text from the ___ tab.",
+        "options": [
+          "File",
+          "Format",
+          "Insert",
+          "Home"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "___ make the text appear thicker and darker.",
+        "options": [
+          "Italics",
+          "Format",
+          "Font face",
+          "Bold"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "There are ___ types of alignments in text formatting in Word.",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "The ___ tab lets you control the look and feel of your document in Microsoft Word.",
+        "options": [
+          "Layout",
+          "Margin",
+          "Caption",
+          "Format"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "We can insert the image in the Word document from the ___ tab.",
+        "options": [
+          "Insert",
+          "File",
+          "Home",
+          "View"
+        ],
+        "correct": 0
+      },
+      {
+        "q": "We can resize the image by clicking and dragging on its ___.",
+        "options": [
+          "Outline",
+          "Center",
+          "Resize handles",
+          "Arrows"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "The keyboard shortcut to copy is:",
+        "options": [
+          "Ctrl + X",
+          "Ctrl + C",
+          "Ctrl + P",
+          "Ctrl + S"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "We can insert the table in the Word document from the ___ tab.",
+        "options": [
+          "File",
+          "Home",
+          "Insert",
+          "View"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "___ appears at the top margin of the Word document.",
+        "options": [
+          "Footer",
+          "Title",
+          "Address bar",
+          "Header"
+        ],
+        "correct": 3
+      },
+      {
+        "q": "To print the Word document, we go to the ___ tab.",
+        "options": [
+          "Print",
+          "File",
+          "Format",
+          "Insert"
+        ],
+        "correct": 1
+      },
+      {
+        "q": "The easiest way to create a multimedia presentation is to create it on ___.",
+        "options": [
+          "Microsoft Word",
+          "Microsoft Excel",
+          "Microsoft PowerPoint",
+          "Microsoft Paint"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "The keyboard shortcut to create new email is:",
+        "options": [
+          "Ctrl + S",
+          "Ctrl + N",
+          "Ctrl + M",
+          "Ctrl + X"
+        ],
+        "correct": 2
+      },
+      {
+        "q": "It is always safe to ___ your account, if not using it.",
+        "options": [
+          "Protect",
+          "Sign out",
+          "Sign in",
+          "Delete"
+        ],
+        "correct": 1
+      }
+    ],
+    "brief": [
+      {
+        "q": "Write a note on benefits of Microsoft PowerPoint which adds importance to any presentation for any kind of user.",
+        "a": [
+          "Some benefits of Microsoft PowerPoint which add importance to presentations for any kind of user:",
+          "(1) <strong>Point-to-Point Focus:</strong> PowerPoint helps drive presentation-focused detail by pointing out important ideas through slides rather than writing paragraphs — a detailed statement with voice, animation, or graphical representation is more eye-catching and saves time and effort.",
+          "(2) <strong>Attractive Visuals:</strong> Visual representation leaves a stronger impression than verbal statements. PowerPoint offers multimedia options — colourful backgrounds, text, and animation — for a striking look.",
+          "(3) <strong>Numerous Resources:</strong> PowerPoint has numerous features to add references from the Internet with a single click.",
+          "(4) <strong>Breaking the complexity:</strong> The presenter can represent ideas in a simpler way, saving effort. PowerPoint also supports laser pointers for narration, helping the presenter keep eye contact with the audience while covering bullet points.",
+          "(5) <strong>User Ownership:</strong> PowerPoint allows a digital signature on a presentation so others cannot modify or add content without the owner's consent.",
+          "(6) <strong>Multimedia capability:</strong> PowerPoint can convert a presentation into video or audio, share it online, or save it to DVD for parties, functions, academics, and entertainment. It can also be viewed on devices like iPhone, Samsung Galaxy, Blackberry, etc."
+        ]
+      }
+    ]
+  },
+  {
+    "num": 3,
+    "title": "Coming Soon",
+    "tag": "",
+    "blurb": "Notes for this unit have not been digitised yet.",
+    "color": "#F59E0B",
+    "available": false,
+    "sections": []
+  },
+  {
+    "num": 4,
+    "title": "Coming Soon",
+    "tag": "",
+    "blurb": "Notes for this unit have not been digitised yet.",
+    "color": "#0EA5E9",
+    "available": false,
+    "sections": []
+  },
+  {
+    "num": 5,
+    "title": "Coming Soon",
+    "tag": "",
+    "blurb": "Notes for this unit have not been digitised yet.",
+    "color": "#F43F5E",
+    "available": false,
+    "sections": []
+  },
+  {
+    "num": 6,
+    "title": "Coming Soon",
+    "tag": "",
+    "blurb": "Notes for this unit have not been digitised yet.",
+    "color": "#8B5CF6",
+    "available": false,
+    "sections": []
+  }
+]

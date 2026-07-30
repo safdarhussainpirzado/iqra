@@ -32,6 +32,11 @@
                 <span class="nav-label">Dashboard</span>
                 <span class="nav-tooltip">Dashboard</span>
             </a>
+            <a href="/textbooks" target="_blank" class="nav-item">
+                <span class="nav-icon"><i class="fa-solid fa-book-open-reader"></i></span>
+                <span class="nav-label">Digital Textbooks</span>
+                <span class="nav-tooltip">Digital Textbooks</span>
+            </a>
 
             <div class="nav-section">Academic Hierarchy</div>
             <div class="nav-section-divider"></div>

@@ -89,22 +89,46 @@ class DatabaseSeeder extends Seeder
             $classes[$i] = SubjectClass::create([
                 'name' => "Class {$i}",
                 'level' => $i,
+                'slug' => "class-{$i}",
+                'sort_order' => $i,
             ]);
         }
 
-        // 5. Seed Boards
-        $boards = [
-            'FG Schools / Federal Board Islamabad' => 'FBISE',
-            'Punjab Boards' => 'PUNJAB',
-            'Sindh Boards' => 'SINDH',
-            'Khyber Pakhtunkhwa Boards (KPK)' => 'KPK',
-            'Balochistan Boards' => 'BALOCHISTAN',
+        // 5. Seed Board Groups and Boards
+        $boardGroupsData = [
+            'fg' => 'FG Schools / Federal Board Islamabad',
+            'punjab' => 'Punjab Boards',
+            'sindh' => 'Sindh Boards',
+            'kpk' => 'Khyber Pakhtunkhwa Boards (KPK)',
+            'balochistan' => 'Balochistan Boards',
         ];
-        $boardModels = [];
-        foreach ($boards as $name => $code) {
-            $boardModels[$code] = Board::create([
+
+        $boardGroups = [];
+        $bgOrder = 1;
+        foreach ($boardGroupsData as $slug => $name) {
+            $boardGroups[$slug] = \App\Models\BoardGroup::create([
                 'name' => $name,
-                'code' => $code,
+                'slug' => $slug,
+                'sort_order' => $bgOrder++,
+            ]);
+        }
+
+        $boards = [
+            'FG Schools / Federal Board Islamabad' => ['code' => 'FBISE', 'group' => 'fg', 'slug' => 'federal-board'],
+            'Punjab Boards' => ['code' => 'PUNJAB', 'group' => 'punjab', 'slug' => 'punjab-board'],
+            'Sindh Boards' => ['code' => 'SINDH', 'group' => 'sindh', 'slug' => 'sindh-board'],
+            'Khyber Pakhtunkhwa Boards (KPK)' => ['code' => 'KPK', 'group' => 'kpk', 'slug' => 'kpk-board'],
+            'Balochistan Boards' => ['code' => 'BALOCHISTAN', 'group' => 'balochistan', 'slug' => 'balochistan-board'],
+        ];
+
+        $boardModels = [];
+        foreach ($boards as $name => $info) {
+            $boardModels[$info['code']] = Board::create([
+                'name' => $name,
+                'code' => $info['code'],
+                'board_group_id' => $boardGroups[$info['group']]->id,
+                'slug' => $info['slug'],
+                'is_active' => true,
             ]);
         }
 
@@ -209,6 +233,8 @@ class DatabaseSeeder extends Seeder
                         [
                             'class_id' => $class->id,
                             'name' => "{$subjectName} - {$class->name}",
+                            'slug' => Str::slug($subjectName),
+                            'color_hex' => '#10B981',
                         ]
                     );
 
@@ -256,6 +282,18 @@ class DatabaseSeeder extends Seeder
                     }
                 }
             }
+        }
+
+        // Seed our parsed premium Class 7 Computer Science units
+        $jsonPath = database_path('seeders/computer_science_7.json');
+        if (file_exists($jsonPath)) {
+            $this->command->info("Seeding structured digital textbook for Class 7 Computer Science...");
+            \Illuminate\Support\Facades\Artisan::call('app:import-unit', [
+                'file' => $jsonPath,
+                '--board' => 'PUNJAB',
+                '--class' => 7,
+                '--subject' => 'COMP-7'
+            ]);
         }
     }
 }

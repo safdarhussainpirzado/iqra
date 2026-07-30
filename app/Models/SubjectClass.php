@@ -11,7 +11,7 @@ class SubjectClass extends Model
 
     protected $table = 'classes';
 
-    protected $fillable = ['name', 'level'];
+    protected $fillable = ['name', 'level', 'slug', 'sort_order'];
 
     public function subjects()
     {
