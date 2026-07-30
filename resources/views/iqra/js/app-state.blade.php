@@ -536,7 +536,10 @@
             },
 
             async loadJobs() {
-                try { this.jobsData = await this.apiCall('jobs'); }
+                try {
+                    this.jobsData = await this.apiCall('jobs');
+                    try { this.systemLogs = await this.apiCall('logs'); } catch (le) {}
+                }
                 catch (e) { console.error('Failed to load jobs', e); }
             },
 

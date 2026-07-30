@@ -63,6 +63,7 @@ class IngestionController extends Controller
             // Only pass plain scalar metadata — UploadedFile objects cannot be serialized into the queue
             $safeMetadata = $request->only(['target_type', 'board_id', 'class_id', 'subject_id', 'title', 'type', 'difficulty', 'marks', 'language']);
             $safeMetadata['chapter_id'] = $chapterId;
+            $safeMetadata['user_id'] = $request->user()->id;
 
             ProcessOcrJob::dispatch($tempPath, $request->target_type, $safeMetadata);
             

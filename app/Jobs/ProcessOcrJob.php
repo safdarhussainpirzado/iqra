@@ -80,8 +80,25 @@ class ProcessOcrJob implements ShouldQueue
             // 4. Save to Database according to targetType
             $this->saveToDatabase($extractedText);
 
+            // 5. Log success activity
+            \App\Models\ActivityLog::create([
+                'user_id' => $this->metadata['user_id'] ?? 1,
+                'action' => 'ingest_ocr_success',
+                'description' => "Successfully parsed and saved {$this->targetType}: {$this->metadata['title']}",
+                'ip_address' => '127.0.0.1',
+            ]);
+
         } catch (Exception $e) {
             Log::error("OCR Processing failed: " . $e->getMessage());
+
+            // Log failure activity
+            \App\Models\ActivityLog::create([
+                'user_id' => $this->metadata['user_id'] ?? 1,
+                'action' => 'ingest_ocr_failed',
+                'description' => "Failed OCR Job for PDF: {$this->metadata['title']}. Error: " . $e->getMessage(),
+                'ip_address' => '127.0.0.1',
+            ]);
+
             throw $e;
         } finally {
             // Cleanup temp files

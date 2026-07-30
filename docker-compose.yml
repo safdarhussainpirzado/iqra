@@ -58,7 +58,7 @@ services:
       dockerfile: docker/Dockerfile
     container_name: iqra-queue
     restart: unless-stopped
-    command: php artisan queue:work
+    command: php artisan queue:work --timeout=3600 --tries=3
     volumes:
       - .:/var/www/html
     networks:

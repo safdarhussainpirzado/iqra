@@ -2,7 +2,7 @@
 <div x-show="currentView === 'jobs'" class="space-y-6" x-transition>
 
     {{-- Stats Row --}}
-    <div class="grid grid-cols-3 gap-6">
+    <div class="grid grid-cols-4 gap-6">
         <div class="bg-white rounded-3xl border border-slate-150 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
             <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 shadow-sm">
                 <i class="fas fa-hourglass-half text-base"></i>
@@ -23,6 +23,16 @@
             </div>
         </div>
 
+        <div class="bg-white rounded-3xl border border-slate-150 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-sm">
+                <i class="fas fa-circle-check text-base"></i>
+            </div>
+            <div>
+                <div class="text-2xl font-black text-slate-800" x-text="systemLogs.filter(l => l.action.includes('success') && (l.action.includes('ocr') || l.action.includes('ingest'))).length"></div>
+                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Completed Tasks</div>
+            </div>
+        </div>
+        
         <div class="bg-white rounded-3xl border border-slate-150 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
             <div class="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600 shadow-sm">
                 <i class="fas fa-circle-xmark text-base"></i>
