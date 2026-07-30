@@ -3,42 +3,42 @@
      ═══════════════════════════════════════════════════════════════════ --}}
 <div x-show="currentView === 'questions'" class="space-y-6" x-transition>
 
-    {{-- Stats Row --}}
-    <div class="grid grid-cols-4 gap-4">
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center text-pink-600 shadow-sm">
-                <i class="fas fa-circle-question text-base"></i>
+    {{-- Stats Row matching ZIWO exactly with absolute top offset icons --}}
+    <div class="grid grid-cols-4 gap-6 pt-6">
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-pink-500 shadow-[0_8px_16px_rgba(244,63,94,0.2)] text-white">
+                <i class="fas fa-circle-question text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="questions.length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Total Questions</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Total Questions</span>
+                <span class="text-3xl font-black text-slate-800" x-text="questions.length"></span>
             </div>
         </div>
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm">
-                <i class="fas fa-list-check text-base"></i>
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-indigo-500 shadow-[0_8px_16px_rgba(99,102,241,0.2)] text-white">
+                <i class="fas fa-list-check text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="questions.filter(q => q.type === 'MCQ').length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">MCQ Count</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">MCQ Count</span>
+                <span class="text-3xl font-black text-slate-800" x-text="questions.filter(q => q.type === 'MCQ').length"></span>
             </div>
         </div>
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-sm">
-                <i class="fas fa-gauge-high text-base"></i>
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-emerald-500 shadow-[0_8px_16px_rgba(16,185,129,0.2)] text-white">
+                <i class="fas fa-gauge-high text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="questions.filter(q => q.difficulty === 'Easy').length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Easy Level</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Easy Level</span>
+                <span class="text-3xl font-black text-slate-800" x-text="questions.filter(q => q.difficulty === 'Easy').length"></span>
             </div>
         </div>
-        <div class="bg-white rounded-3xl border border-slate-150/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600 shadow-sm">
-                <i class="fas fa-fire text-base"></i>
+        <div class="relative flex flex-col bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 hover:-translate-y-1 transition-all duration-300 p-5 text-right pt-5">
+            <div class="absolute -top-4 left-4 h-10 w-10 flex items-center justify-center rounded-xl bg-rose-500 shadow-[0_8px_16px_rgba(225,29,72,0.2)] text-white">
+                <i class="fas fa-fire text-xs"></i>
             </div>
             <div>
-                <div class="text-2xl font-black text-slate-800" x-text="questions.filter(q => q.difficulty === 'Hard').length"></div>
-                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Hard Level</div>
+                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Hard Level</span>
+                <span class="text-3xl font-black text-slate-800" x-text="questions.filter(q => q.difficulty === 'Hard').length"></span>
             </div>
         </div>
     </div>
