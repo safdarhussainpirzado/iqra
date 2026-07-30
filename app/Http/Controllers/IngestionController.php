@@ -39,16 +39,18 @@ class IngestionController extends Controller
         $file = $request->file('file');
         $ext = $file->getClientOriginalExtension();
         
-        // Save file to a secure temporary path
+        // Save file to a secure temporary path inside shared storage
         $tempName = uniqid('upload_') . '.' . $ext;
-        $tempPath = sys_get_temp_dir() . '/' . $tempName;
+        $tempPath = storage_path('app/private') . '/' . $tempName;
         move_uploaded_file($file->getRealPath(), $tempPath);
 
         $shouldRunOcr = $request->input('run_ocr') === 'true';
 
         // If it's a PDF and OCR is requested, queue the OCR Job
         if ($shouldRunOcr && strtolower($ext) === 'pdf') {
-            ProcessOcrJob::dispatch($tempPath, $request->target_type, $request->all());
+            // Only pass plain scalar metadata — UploadedFile objects cannot be serialized into the queue
+            $safeMetadata = $request->only(['target_type', 'board_id', 'class_id', 'subject_id', 'chapter_id', 'title', 'type', 'difficulty', 'marks', 'language']);
+            ProcessOcrJob::dispatch($tempPath, $request->target_type, $safeMetadata);
             
             ActivityLog::create([
                 'user_id' => $request->user()->id,

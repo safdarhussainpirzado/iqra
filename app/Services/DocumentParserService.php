@@ -119,16 +119,21 @@ class DocumentParserService
 
     private function parsePdf(string $filePath): string
     {
-        // Try parsing using pdftotext binary
+        // Try parsing using pdftotext binary (works for text-based PDFs)
         $output = [];
         $returnVar = 0;
         exec("pdftotext " . escapeshellarg($filePath) . " - 2>&1", $output, $returnVar);
 
         if ($returnVar === 0) {
-            return implode("\n", $output);
+            $text = trim(implode("\n", $output));
+            if (!empty($text)) {
+                return $text;
+            }
         }
 
-        // If pdftotext fails, return empty to trigger OCR downstream
-        return '';
+        // If pdftotext fails or returns empty (scanned/image PDF),
+        // return a placeholder so the user knows OCR is required
+        return "[This PDF appears to be a scanned image. No text could be extracted automatically. " .
+               "Please re-upload with 'Enable OCR' checked to extract text using Tesseract OCR.]";
     }
 }
