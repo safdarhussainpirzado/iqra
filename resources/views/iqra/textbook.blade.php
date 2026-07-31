@@ -175,6 +175,15 @@
                     x-text="'{{ $sec['label'] }} ({{ $sec['count'] }})'">
                   </button>
                 @endforeach
+                @if(isset($note))
+                  <button @click="openSection = (openSection === 'ocr_draft' ? '' : 'ocr_draft')"
+                    class="px-4 py-2 rounded-full text-xs font-semibold border transition"
+                    :class="openSection === 'ocr_draft' ? 'text-white border-transparent' : 'text-slate-600 border-slate-300 hover:border-slate-400'"
+                    style="background: #6366F1;"
+                    :style="openSection === 'ocr_draft' ? '' : 'background:transparent'"
+                    x-text="'Parsed OCR Text (PDF)'">
+                  </button>
+                @endif
               </div>
 
               <!-- TICK EXERCISE -->
@@ -397,6 +406,16 @@
                         </div>
                       </details>
                     @endforeach
+                  </div>
+                </section>
+              @endif
+              <!-- PARSED OCR TEXT DRAFT -->
+              @if(isset($note))
+                <section x-show="openSection === 'ocr_draft'" x-collapse x-cloak>
+                  <h3 class="font-display text-xl font-bold mb-1">Parsed OCR Text (PDF Draft)</h3>
+                  <p class="text-xs text-slate-500 mb-4">Raw text extracted via the background OCR pipeline.</p>
+                  <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <pre class="whitespace-pre-wrap font-sans text-xs text-slate-700 leading-relaxed">{{ $note->extracted_text }}</pre>
                   </div>
                 </section>
               @endif

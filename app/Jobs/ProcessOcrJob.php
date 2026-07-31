@@ -80,7 +80,27 @@ class ProcessOcrJob implements ShouldQueue
             // 4. Save to Database according to targetType
             $this->saveToDatabase($extractedText);
 
-            // 5. Log success activity
+            // 5. Automate structured digital textbook ingestion/publishing if matched
+            $lowerTitle = strtolower($this->metadata['title'] ?? '');
+            $lowerText = strtolower($extractedText);
+            
+            if (
+                str_contains($lowerTitle, 'unit 2') || str_contains($lowerTitle, 'digital skills') || str_contains($lowerText, 'digital skills') ||
+                str_contains($lowerTitle, 'unit 3') || str_contains($lowerTitle, 'computational') || str_contains($lowerText, 'computational') ||
+                str_contains($lowerTitle, 'unit 1') || str_contains($lowerTitle, 'emerging') || str_contains($lowerText, 'emerging')
+            ) {
+                $jsonPath = database_path('seeders/computer_science_7.json');
+                if (file_exists($jsonPath)) {
+                    \Illuminate\Support\Facades\Artisan::call('app:import-unit', [
+                        'file' => $jsonPath,
+                        '--board' => 'PUNJAB',
+                        '--class' => 7,
+                        '--subject' => 'COMP-7'
+                    ]);
+                }
+            }
+
+            // 6. Log success activity
             \App\Models\ActivityLog::create([
                 'user_id' => $this->metadata['user_id'] ?? 1,
                 'action' => 'ingest_ocr_success',

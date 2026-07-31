@@ -169,6 +169,11 @@ class TextbookController extends Controller
             }
         }
 
+        $note = null;
+        if ($chapter) {
+            $note = \App\Models\Note::where('chapter_id', $chapter->id)->first();
+        }
+
         return view('iqra.textbook', [
             'boardGroups' => $boardGroups,
             'activeGroup' => $group,
@@ -179,6 +184,7 @@ class TextbookController extends Controller
             'activeUnitNumber' => $unitNumber,
             'units' => $units,
             'structuredData' => $structuredData,
+            'note' => $note,
         ]);
     }
 }
