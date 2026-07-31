@@ -154,7 +154,7 @@
             <div class="absolute -right-6 -bottom-10 font-display font-extrabold text-[9rem] text-white/10 select-none">{{ $activeChapter->chapter_number }}</div>
           </div>
 
-          @if(!$activeChapter->is_published)
+          @if(!$activeChapter->is_published && !isset($note))
             <div class="px-8 md:px-12 py-16 text-center">
               <div class="text-5xl mb-4">📘</div>
               <h3 class="font-display text-2xl font-bold text-slate-700">Notes for this unit are on the way</h3>
@@ -162,7 +162,7 @@
             </div>
           @else
             <!-- RENDER CONTENT WITH ALPINE -->
-            <div class="px-6 md:px-12 py-8 space-y-4" x-data="{ openSection: '{{ count($structuredData['sections'] ?? []) > 0 ? $structuredData['sections'][0]['key'] : '' }}' }">
+            <div class="px-6 md:px-12 py-8 space-y-4" x-data="{ openSection: '{{ count($structuredData['sections'] ?? []) > 0 ? $structuredData['sections'][0]['key'] : (isset($note) ? 'ocr_draft' : '') }}' }">
 
               <!-- SECTION NAV -->
               <div class="flex flex-wrap gap-2 mb-2">

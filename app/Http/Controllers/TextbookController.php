@@ -116,7 +116,12 @@ class TextbookController extends Controller
 
         // If active chapter is found, load its sections and items
         $structuredData = null;
-        if ($chapter && $chapter->is_published) {
+        $note = null;
+        if ($chapter) {
+            $note = \App\Models\Note::where('chapter_id', $chapter->id)->orderBy('id', 'desc')->first();
+        }
+
+        if ($chapter && ($chapter->is_published || $note)) {
             $sections = Section::with(['items.options', 'items.paragraphs', 'items.table.columns', 'items.table.rows.cells'])
                 ->where('chapter_id', $chapter->id)
                 ->orderBy('sort_order')
@@ -169,10 +174,7 @@ class TextbookController extends Controller
             }
         }
 
-        $note = null;
-        if ($chapter) {
-            $note = \App\Models\Note::where('chapter_id', $chapter->id)->first();
-        }
+
 
         return view('iqra.textbook', [
             'boardGroups' => $boardGroups,

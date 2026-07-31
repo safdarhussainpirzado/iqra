@@ -131,30 +131,38 @@ class ProcessOcrJob implements ShouldQueue
     {
         switch ($this->targetType) {
             case 'note':
-                Note::create([
-                    'board_id' => $this->metadata['board_id'],
-                    'class_id' => $this->metadata['class_id'],
-                    'subject_id' => $this->metadata['subject_id'],
-                    'chapter_id' => $this->metadata['chapter_id'],
-                    'title' => $this->metadata['title'],
-                    'file_path' => 'database_only',
-                    'extracted_text' => $text,
-                    'file_type' => 'PDF (OCR)',
-                ]);
+                Note::updateOrCreate(
+                    [
+                        'board_id' => $this->metadata['board_id'],
+                        'class_id' => $this->metadata['class_id'],
+                        'subject_id' => $this->metadata['subject_id'],
+                        'chapter_id' => $this->metadata['chapter_id'],
+                    ],
+                    [
+                        'title' => $this->metadata['title'],
+                        'file_path' => 'database_only',
+                        'extracted_text' => $text,
+                        'file_type' => 'PDF (OCR)',
+                    ]
+                );
                 break;
 
             case 'material':
-                Material::create([
-                    'board_id' => $this->metadata['board_id'],
-                    'class_id' => $this->metadata['class_id'],
-                    'subject_id' => $this->metadata['subject_id'],
-                    'chapter_id' => $this->metadata['chapter_id'],
-                    'title' => $this->metadata['title'],
-                    'file_path' => 'database_only',
-                    'extracted_text' => $text,
-                    'file_type' => 'PDF (OCR)',
-                    'version' => 1,
-                ]);
+                Material::updateOrCreate(
+                    [
+                        'board_id' => $this->metadata['board_id'],
+                        'class_id' => $this->metadata['class_id'],
+                        'subject_id' => $this->metadata['subject_id'],
+                        'chapter_id' => $this->metadata['chapter_id'],
+                    ],
+                    [
+                        'title' => $this->metadata['title'],
+                        'file_path' => 'database_only',
+                        'extracted_text' => $text,
+                        'file_type' => 'PDF (OCR)',
+                        'version' => \DB::raw('version + 1'),
+                    ]
+                );
                 break;
 
             case 'question':
